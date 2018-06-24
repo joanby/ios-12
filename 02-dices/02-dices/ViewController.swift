@@ -73,6 +73,8 @@ class ViewController: UIViewController {
             self.imageViewDiceLeft.image = UIImage(named: nameImageDiceLeft)
             self.imageViewDiceRight.image = UIImage(named: nameImageDiceRight)
         }
+        
+        
     }
     
     
