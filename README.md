@@ -14,3 +14,6 @@ Una app muy variada con varias pestañas donde aprenderás a utilizar
 * Bucles para calcular los números de Fibonacci y la aproximación del número de oro
 * Tablas con todos los tipos de fuentes y familias que existen en iOS para usarlas en tus propios proyectos
 * Segues y UINavigationControllers para navegar entre diferentes View Controllers
+
+## Proyecto 4 - Piano
+Un piano en toda regla para poder aprender a tocar tus primeras canciones usando AVFoundation para reproducir sonidos.
