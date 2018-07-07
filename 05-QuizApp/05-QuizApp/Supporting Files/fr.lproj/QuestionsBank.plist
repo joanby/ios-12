@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>questions</key>
+	<array>
+		<dict>
+			<key>question</key>
+			<string>Le Vatican a assez d&apos;argent pour éradiquer la pauvreté partout dans le monde</string>
+			<key>answer</key>
+			<true/>
+			<key>explanation</key>
+			<string>Ils ont assez d&apos;argent pour éradiquer la pauvreté deux fois</string>
+		</dict>
+		<dict>
+			<key>question</key>
+			<string>L'hippocampe est si fidèle à son partenaire, que lorsque l'un meurt, l'autre le fait aussi en peu de temps</string>
+			<key>answer</key>
+			<true/>
+			<key>explanation</key>
+			<string>On ne peut pas vivre sans l'autre</string>
+		</dict>
+		<dict>
+			<key>question</key>
+			<string>Les humains sont les seuls êtres vivants qui pratiquent le sexe pour le plaisir</string>
+			<key>answer</key>
+			<false/>
+			<key>explanation</key>
+			<string></string>
+		</dict>
+		<dict>
+			<key>question</key>
+			<string>La graine de pomme contient du cyanure et est toxique</string>
+			<key>answer</key>
+			<true/>
+			<key>explanation</key>
+			<string>On estime qu'environ 30-40 graines pourraient nous tuer</string>
+		</dict>
+		<dict>
+			<key>question</key>
+			<string>Vous pouvez raser le moustache à un chat sans aucun problème</string>
+			<key>answer</key>
+			<false/>
+			<key>explanation</key>
+			<string></string>
+		</dict>
+		<dict>
+			<key>question</key>
+			<string>Un koala doit boire au moins une fois par jour</string>
+			<key>answer</key>
+			<false/>
+			<key>explanation</key>
+			<string>Un koala n'a pas besoin de boire absolument jamais.</string>
+		</dict>
+		<dict>
+			<key>question</key>
+			<string>Edison, l'inventeur de l'ampoule, craignait l'obscurité</string>
+			<key>answer</key>
+			<true/>
+			<key>explanation</key>
+			<string></string>
+		</dict>
+		<dict>
+			<key>question</key>
+			<string>Les scorpions sont les seuls animaux qui se suicident quand ils ne peuvent échapper à une situation dangereuse</string>
+			<key>answer</key>
+			<true/>
+			<key>explanation</key>
+			<string></string>
+		</dict>
+		<dict>
+			<key>question</key>
+			<string>Les yeux d'un hamster peuvent tomber s'il est suspendu à l'envers</string>
+			<key>answer</key>
+			<true/>
+			<key>explanation</key>
+			<string></string>
+		</dict>
+		<dict>
+			<key>question</key>
+			<string>Si vous divisez le nombre d'abeilles femelles parmi celles des abeilles mâles à partir d'un nid d'abeilles, vous obtenez le nombre d'or</string>
+			<key>answer</key>
+			<false/>
+			<key>explanation</key>
+			<string></string>
+		</dict>
+		<dict>
+			<key>question</key>
+			<string>Les palmiers sont nés pour la première fois dans le pôle nord</string>
+			<key>answer</key>
+			<true/>
+			<key>explanation</key>
+			<string></string>
+		</dict>
+		<dict>
+			<key>question</key>
+			<string>Cervantes et Shakespeare sont morts le même jour</string>
+			<key>answer</key>
+			<true/>
+			<key>explanation</key>
+			<string></string>
+		</dict>
+	</array>
+</dict>
+</plist>

@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>questions</key>
+	<array>
+		<dict>
+			<key>question</key>
+			<string>Vatican has enough money to eradicate poverty all around the world</string>
+			<key>answer</key>
+			<true/>
+			<key>explanation</key>
+			<string>They have enough money to eradicate poverty twice</string>
+		</dict>
+		<dict>
+			<key>question</key>
+			<string>The seahorse is so faithful to its partner, that when one dies, the other also does it in a short time</string>
+			<key>answer</key>
+			<true/>
+			<key>explanation</key>
+			<string>One can not live without the other</string>
+		</dict>
+		<dict>
+			<key>question</key>
+			<string>Humans are the only living beings who practice sex for pleasure</string>
+			<key>answer</key>
+			<false/>
+			<key>explanation</key>
+			<string></string>
+		</dict>
+		<dict>
+			<key>question</key>
+			<string>The apple seed contains cyanide and is toxic</string>
+			<key>answer</key>
+			<true/>
+			<key>explanation</key>
+			<string>It is estimated that about 30-40 seeds could kill us</string>
+		</dict>
+		<dict>
+			<key>question</key>
+			<string>Cats can shaved their mustache without any problem</string>
+			<key>answer</key>
+			<false/>
+			<key>explanation</key>
+			<string></string>
+		</dict>
+		<dict>
+			<key>question</key>
+			<string>A koala needs to drink at least once a day</string>
+			<key>answer</key>
+			<false/>
+			<key>explanation</key>
+			<string>A koala does not need to drink absolutely never.</string>
+		</dict>
+		<dict>
+			<key>question</key>
+			<string>Edison, the inventor of the light bulb, feared darkness</string>
+			<key>answer</key>
+			<true/>
+			<key>explanation</key>
+			<string></string>
+		</dict>
+		<dict>
+			<key>question</key>
+			<string>Scorpions are the only animals that commit suicide when they can not escape from a dangerous situation</string>
+			<key>answer</key>
+			<true/>
+			<key>explanation</key>
+			<string></string>
+		</dict>
+		<dict>
+			<key>question</key>
+			<string>The eyes of a hamster can fall if it hangs upside down</string>
+			<key>answer</key>
+			<true/>
+			<key>explanation</key>
+			<string></string>
+		</dict>
+		<dict>
+			<key>question</key>
+			<string>If you divide the number of female bees among that of male bees from a honeycomb, you get the golden number</string>
+			<key>answer</key>
+			<false/>
+			<key>explanation</key>
+			<string></string>
+		</dict>
+		<dict>
+			<key>question</key>
+			<string>The palms were born for the first time in the north pole</string>
+			<key>answer</key>
+			<true/>
+			<key>explanation</key>
+			<string></string>
+		</dict>
+		<dict>
+			<key>question</key>
+			<string>Cervantes and Shakespeare died the same day</string>
+			<key>answer</key>
+			<true/>
+			<key>explanation</key>
+			<string></string>
+		</dict>
+	</array>
+</dict>
+</plist>

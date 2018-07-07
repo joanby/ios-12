@@ -1,0 +1,18 @@
+/* 
+  Localizable.strings
+  05-QuizApp
+
+  Created by Juan Gabriel Gomila Salas on 7/7/18.
+  Copyright © 2018 Frogames. All rights reserved.
+*/
+
+/*Popup de Game Over*/
+"game.over.title" = "Game Over";
+"game.over.message1" = "You won";
+"game.over.message2" = "Try again!";
+
+/*Puntuación de la partida*/
+"score.text" = "Score";
+"question.ok" = "¡Congratulations";
+"question.ko" = "Sorry...";
+

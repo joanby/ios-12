@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>questions</key>
+	<array>
+		<dict>
+			<key>question</key>
+			<string>El Vaticano tiene la cantidad de dinero suficiente para acabar con la pobreza mundial dos veces</string>
+			<key>answer</key>
+			<true/>
+			<key>explanation</key>
+			<string>En efecto, disponen de tanto dinero que podrían erradicar la pobreza mundial. </string>
+		</dict>
+		<dict>
+			<key>question</key>
+			<string>El caballito de mar es tan fiel a su pareja, que cuando uno muere, el otro también lo hace al poco tiempo</string>
+			<key>answer</key>
+			<true/>
+			<key>explanation</key>
+			<string>Uno no puede vivir sin el otro</string>
+		</dict>
+		<dict>
+			<key>question</key>
+			<string>Los humanos son los únicos seres vivos que practican el sexo por placer</string>
+			<key>answer</key>
+			<false/>
+			<key>explanation</key>
+			<string></string>
+		</dict>
+		<dict>
+			<key>question</key>
+			<string>La semilla de la manzana contiene cianuro y es tóxica</string>
+			<key>answer</key>
+			<true/>
+			<key>explanation</key>
+			<string>Se estima que unas 30-40 semillas podrían matarnos</string>
+		</dict>
+		<dict>
+			<key>question</key>
+			<string>Se puede afeitar el bigote a un gato sin ningún problema</string>
+			<key>answer</key>
+			<false/>
+			<key>explanation</key>
+			<string></string>
+		</dict>
+		<dict>
+			<key>question</key>
+			<string>Un Koala necesita beber al menos una vez al día</string>
+			<key>answer</key>
+			<false/>
+			<key>explanation</key>
+			<string>Un koala no necesita beber absolutamente nunca.</string>
+		</dict>
+		<dict>
+			<key>question</key>
+			<string>Edison, el inventor de la bombilla, temía a la oscuridad</string>
+			<key>answer</key>
+			<true/>
+			<key>explanation</key>
+			<string></string>
+		</dict>
+		<dict>
+			<key>question</key>
+			<string>Los escorpiones son los únicos animales que se suicidan cuando no pueden escapar de una situación de peligro</string>
+			<key>answer</key>
+			<true/>
+			<key>explanation</key>
+			<string></string>
+		</dict>
+		<dict>
+			<key>question</key>
+			<string>Los ojos de un hámster se pueden caer si se le cuelga cabeza abajo</string>
+			<key>answer</key>
+			<true/>
+			<key>explanation</key>
+			<string></string>
+		</dict>
+		<dict>
+			<key>question</key>
+			<string>Si divides el número de abejas hembra entre el de abejas macho de un panal, se obtiene el número de oro</string>
+			<key>answer</key>
+			<false/>
+			<key>explanation</key>
+			<string></string>
+		</dict>
+		<dict>
+			<key>question</key>
+			<string>Las palmeras nacieron por primera vez en el polo norte</string>
+			<key>answer</key>
+			<true/>
+			<key>explanation</key>
+			<string></string>
+		</dict>
+		<dict>
+			<key>question</key>
+			<string>Cervantes y Shakespeare murieron el mismo día</string>
+			<key>answer</key>
+			<true/>
+			<key>explanation</key>
+			<string></string>
+		</dict>
+	</array>
+</dict>
+</plist>
