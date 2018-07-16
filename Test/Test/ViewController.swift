@@ -20,7 +20,7 @@ class ViewController: UIViewController {
     }
 
     func scrapeNYCMetalScene() -> Void {
-        Alamofire.request("https://udemy.com/u/juangabriel2").responseString { response in
+        Alamofire.request("http://juangabrielgomila.com/en/blog/").responseString { response in
             print("\(response.result.isSuccess)")
             if let html = response.result.value {
                 self.parseHTML(html: html)
@@ -31,17 +31,23 @@ class ViewController: UIViewController {
     
     func parseHTML(html: String) -> Void {
         // Finish this next
-        
+        print(html)
+        print("======")
         do{
         let doc = try Kanna.HTML(html: html, encoding: String.Encoding.utf8)
             
             
             // Search for nodes by CSS selector
-            for show in doc.css("div") {
+            for show in doc.css("a") {
                 
-                print(show.text)
+                print(show.content)
+
+                print(show["href"])
+                if (show.text?.range(of: "[0-9]+\\.[a-zA-Z0-9]+", options: .regularExpression, range: nil, locale: nil) != nil) {
+
+                    print(show.text!.replacingOccurrences(of: "Buy Now on iTunes", with: ""))
                 //print(show["src"])
-                
+                }
                 
                 /*// Strip the string of surrounding whitespace.
                 let showString = show.text!.trimmingCharacters(in: CharacterSet.whitespacesAndNewlines)

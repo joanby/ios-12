@@ -1,0 +1,29 @@
+PODS:
+  - Alamofire (4.5.0)
+  - Kanna (4.0.0)
+
+DEPENDENCIES:
+  - Alamofire
+  - Kanna (from `https://github.com/tid-kijyun/Kanna`, branch `feature/v4.0.0`)
+
+SPEC REPOS:
+  https://github.com/cocoapods/specs.git:
+    - Alamofire
+
+EXTERNAL SOURCES:
+  Kanna:
+    :branch: feature/v4.0.0
+    :git: https://github.com/tid-kijyun/Kanna
+
+CHECKOUT OPTIONS:
+  Kanna:
+    :commit: 81ce91fd485b637517c340c73590a9b59ac9f7d5
+    :git: https://github.com/tid-kijyun/Kanna
+
+SPEC CHECKSUMS:
+  Alamofire: f28cdffd29de33a7bfa022cbd63ae95a27fae140
+  Kanna: d5ae2a26472f7e7a474e7f36a9cd8aa2c8c63ad3
+
+PODFILE CHECKSUM: 68fa28dd1d819588401ba1cf389318de0f69d6d2
+
+COCOAPODS: 1.5.2
