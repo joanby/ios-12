@@ -24,3 +24,12 @@ Un brain training con preguntas de verdadero y falso que pondrán todo tu ingeni
 * El patrón del **Modelo, Vista y Controlador**, explicado al 100% con ejemplos prácticos
 * Uso de ficheros de propiedades (property lists) con los protocolos *Codable* de Swift 4
 * Traducción de ficheros y vistas a varios idiomas con la clase *NSLocalizedString*
+
+## Proyecto 6 - Web Scrapping
+Un proyecto donde haremos una descarga de todo el código HTML de la Apple Store con Alamofire, procesamiento de código web con Kanna y nosotros mismos fabricaremos un Top 100 de canciones, con incluso enlace directo a iTunes Music o a Apple Music para tener la AppStore alternativa.
+
+## Proyecto 7 - Maths Training
+Otro juego para entrenar matemáticas esta vez donde la estrella será el Machine Learning para adivinar la respuesta en base al dibujo que haga el usuario de la operación matemática. Usaremos la nueva suite de CoreML, CreateML y Vision para entrenar la red neuronal de clasificación e incorporarla a neustra app. 
+
+## Proyecto 8 - El precio justo
+Una app que seguirá en la línea de CoreML para en este caso entrenar un modelo de predicción que nos diga por cuanto se puede vender una casa en base a conocer el número de baños, garajes, año de construcción y estado de la misma. Muy útil con la gran cantidad de datos que circulan en la red acerca de transacciones, Real State y demás!
