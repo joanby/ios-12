@@ -33,3 +33,15 @@ Otro juego para entrenar matemáticas esta vez donde la estrella será el Machin
 
 ## Proyecto 8 - El precio justo
 Una app que seguirá en la línea de CoreML para en este caso entrenar un modelo de predicción que nos diga por cuanto se puede vender una casa en base a conocer el número de baños, garajes, año de construcción y estado de la misma. Muy útil con la gran cantidad de datos que circulan en la red acerca de transacciones, Real State y demás!
+
+## Proyecto 9 - Eyes Invaders
+Un clon del mítico juego **Space Invaders** donde los enemigos invasores serán destruidos con la ayuda de la realidad aumentada y los ojos del jugador. Un juego completo donde ARKit se convierte en la estrella para combinar realidad y ficción en este nuevo concepto de juego con SceneKit de Apple
+
+## Proyecto 10 - Whatsapp
+Conectividad, servidores, información, registros se dan cita en una app 100% basada en Firebase, el servidor en la nube gratuito de Google que nos permite crear apps multiplataforma sin casi despeinarnos
+
+## Proyecto 11 - Mis notas con Realm
+*COMING SOON*
+
+## Proyecto 12 - PDF Invoce on the go
+*COMING SOON*
