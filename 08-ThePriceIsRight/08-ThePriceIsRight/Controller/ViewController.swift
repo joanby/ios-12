@@ -43,7 +43,7 @@ class ViewController: UIViewController {
                                                   cars: Double(house.garage),
                                                   condition: Double(house.condition),
                                                   rooms: Double(house.rooms),
-                                                  size: Double(house.size)/0.09,
+                                                  size: Double(house.size),
                                                   yearBuilt: Double(house.year))
             
             let formatter = NumberFormatter()
