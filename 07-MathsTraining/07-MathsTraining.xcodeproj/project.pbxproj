@@ -12,10 +12,10 @@
 		01869FD020F51E0200A378F2 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 01869FCE20F51E0200A378F2 /* Main.storyboard */; };
 		01869FD220F51E0300A378F2 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 01869FD120F51E0300A378F2 /* Assets.xcassets */; };
 		01869FD520F51E0300A378F2 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 01869FD320F51E0300A378F2 /* LaunchScreen.storyboard */; };
+		019958DF211769560072B3AB /* MnistModel.mlmodel in Sources */ = {isa = PBXBuildFile; fileRef = 019958DE211769560072B3AB /* MnistModel.mlmodel */; };
 		01AEDED620F669680072807C /* DrawingImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01AEDED520F669680072807C /* DrawingImageView.swift */; };
 		01D841A120F90DA00052FDC3 /* Question.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01D841A020F90DA00052FDC3 /* Question.swift */; };
 		01D841A320F90E280052FDC3 /* QuestionsFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01D841A220F90E280052FDC3 /* QuestionsFactory.swift */; };
-		01D841AB20FBC15E0052FDC3 /* MnistModel.mlmodel in Sources */ = {isa = PBXBuildFile; fileRef = 01D841AA20FBC15E0052FDC3 /* MnistModel.mlmodel */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -26,10 +26,10 @@
 		01869FD120F51E0300A378F2 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		01869FD420F51E0300A378F2 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		01869FD620F51E0300A378F2 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		019958DE211769560072B3AB /* MnistModel.mlmodel */ = {isa = PBXFileReference; lastKnownFileType = file.mlmodel; name = MnistModel.mlmodel; path = ../../../tools/MnistModel.mlmodel; sourceTree = "<group>"; };
 		01AEDED520F669680072807C /* DrawingImageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DrawingImageView.swift; sourceTree = "<group>"; };
 		01D841A020F90DA00052FDC3 /* Question.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Question.swift; sourceTree = "<group>"; };
 		01D841A220F90E280052FDC3 /* QuestionsFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuestionsFactory.swift; sourceTree = "<group>"; };
-		01D841AA20FBC15E0052FDC3 /* MnistModel.mlmodel */ = {isa = PBXFileReference; lastKnownFileType = file.mlmodel; name = MnistModel.mlmodel; path = ../../../tools/MnistModel.mlmodel; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -101,7 +101,7 @@
 		01AEDEDA20F669980072807C /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
-				01D841AA20FBC15E0052FDC3 /* MnistModel.mlmodel */,
+				019958DE211769560072B3AB /* MnistModel.mlmodel */,
 				01869FD120F51E0300A378F2 /* Assets.xcassets */,
 				01869FD620F51E0300A378F2 /* Info.plist */,
 			);
@@ -181,7 +181,7 @@
 			files = (
 				01869FCD20F51E0200A378F2 /* ViewController.swift in Sources */,
 				01D841A320F90E280052FDC3 /* QuestionsFactory.swift in Sources */,
-				01D841AB20FBC15E0052FDC3 /* MnistModel.mlmodel in Sources */,
+				019958DF211769560072B3AB /* MnistModel.mlmodel in Sources */,
 				01D841A120F90DA00052FDC3 /* Question.swift in Sources */,
 				01869FCB20F51E0200A378F2 /* AppDelegate.swift in Sources */,
 				01AEDED620F669680072807C /* DrawingImageView.swift in Sources */,
