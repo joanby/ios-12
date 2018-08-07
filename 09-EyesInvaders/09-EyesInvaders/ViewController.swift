@@ -187,7 +187,8 @@ class ViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate {
         let centerPoint = CGPoint(x: (leftPoint.x + rightPoint.x)/2, y: -(leftPoint.y + rightPoint.y)/2)
       
         eyeGazeHistory.append(centerPoint)
-        eyeGazeHistory.suffix(numberOfSmoothUpdates)
+        //Añadido eyeGazeHistory = ... debido a que el método suffix devuelve la colección con el número de elementos, en lugar de cambiar el tamaño del objeto original.
+        eyeGazeHistory = eyeGazeHistory.suffix(numberOfSmoothUpdates)
         
         aimImageView.transform = eyeGazeHistory.averageAffineTransform
         

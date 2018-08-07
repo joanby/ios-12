@@ -6,4 +6,17 @@
 //  Copyright © 2018 Frogames. All rights reserved.
 //
 
-import Foundation
+class Message {
+    var sender : String = ""
+    var body : String = ""
+    
+    init(sender: String, body: String){
+        self.sender = sender
+        self.body = body
+    }
+    
+    init(){
+        sender = "Juan Gabriel"
+        body = "Esto es un mensaje de prueba para la aplicación del curso de iOS"
+    }
+}
