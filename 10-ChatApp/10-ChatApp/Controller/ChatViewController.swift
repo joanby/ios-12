@@ -9,23 +9,28 @@
 import UIKit
 import Firebase
 
-class ChatViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
+class ChatViewController: UIViewController, UITableViewDataSource, UITableViewDelegate, UITextFieldDelegate {
 
     @IBOutlet weak var messagesTableView: UITableView!
     @IBOutlet weak var messageTextField: UITextField!
     @IBOutlet weak var sendButton: UIButton!
+    @IBOutlet weak var textBoxHeight: NSLayoutConstraint!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
         self.messagesTableView.delegate = self
         self.messagesTableView.dataSource = self
         
+        let tapGesture = UITapGestureRecognizer(target: self, action: #selector(hideMessageZone))
+        self.messagesTableView.addGestureRecognizer(tapGesture)
         
         self.messagesTableView.register(UINib(nibName: "MessageCell", bundle: nil), forCellReuseIdentifier: "MessageCellID")
         
         self.messagesTableView.rowHeight = UITableView.automaticDimension
         self.messagesTableView.estimatedRowHeight = 120
-        // Do any additional setup after loading the view.
+        
+        self.messageTextField.delegate = self
     }
     
 
@@ -38,6 +43,11 @@ class ChatViewController: UIViewController, UITableViewDataSource, UITableViewDe
         // Pass the selected object to the new view controller.
     }
     */
+    
+    
+    /*
+     MARK: - Firebase Methods
+     */
 
     @IBAction func logoutPressed(_ sender: Any) {
         do{
@@ -55,7 +65,28 @@ class ChatViewController: UIViewController, UITableViewDataSource, UITableViewDe
         
     }
     @IBAction func sendPressed(_ sender: UIButton) {
-    
+        self.messageTextField.endEditing(true)
+        
+        messageTextField.isEnabled = false
+        sendButton.isEnabled = false
+        
+        let messagesDB = Database.database().reference().child("Messages")
+        let messageDict = ["sender": Auth.auth().currentUser?.email,
+                           "body" : self.messageTextField.text!]
+        
+        messagesDB.childByAutoId().setValue(messageDict) { (error, ref) in
+            if error != nil {
+                print(error!)
+            } else {
+                print("Mensaje guardado correctamente")
+                
+                self.messageTextField.isEnabled = true
+                self.sendButton.isEnabled = true
+                
+                self.messageTextField.text = ""
+            }
+        }
+        
     }
     
     
@@ -81,5 +112,33 @@ class ChatViewController: UIViewController, UITableViewDataSource, UITableViewDe
         return cell
     }
     
+    
+    /*MARK: - UITextFieldDelegate Methods*/
+    
+    func textFieldDidBeginEditing(_ textField: UITextField) {
+        
+        UIView.animate(withDuration: 0.5) {
+            self.textBoxHeight.constant = 80 + 50 + 258
+            self.view.layoutIfNeeded()
+        }
+        
+    }
+    
+    func textFieldDidEndEditing(_ textField: UITextField) {
+        hideMessageZone()
+    }
+    
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        textField.endEditing(true)
+        return true
+    }
+    
+    @objc func hideMessageZone(){
+        self.messageTextField.resignFirstResponder()
+        UIView.animate(withDuration: 0.5) {
+            self.textBoxHeight.constant = 80
+            self.view.layoutIfNeeded()
+        }
+    }
     
 }

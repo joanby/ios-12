@@ -59,12 +59,12 @@ class ViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
-        guard ARWorldTrackingConfiguration.isSupported else {
+        guard ARFaceTrackingConfiguration.isSupported else {
             print("No se soporta el tracking de caras...")
             return
         }
         // Create a session configuration
-        let configuration = ARWorldTrackingConfiguration()
+        let configuration = ARFaceTrackingConfiguration()
 
         // Run the view's session
         sceneView.session.run(configuration)
@@ -178,9 +178,11 @@ class ViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate {
         rightEye.simdTransform = anchor.rightEyeTransform
         
         let intersectPoints = [leftEye, rightEye].compactMap { eye -> CGPoint? in
-            let hitTest = self.phonePlane.hitTestWithSegment(from: eye.target.position, to: eye.position)
+            let hitTest = self.phonePlane.hitTestWithSegment(from: eye.target.worldPosition, to: eye.worldPosition)
             return hitTest.first?.screenPosition
         }
+        
+        print("PUNTOS DE INTERSECCIÓN: \(intersectPoints)")
         
         guard let leftPoint = intersectPoints.first, let rightPoint = intersectPoints.last else { return }
         
