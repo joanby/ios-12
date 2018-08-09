@@ -22,7 +22,7 @@
                             </imageView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Gs7-6F-NQe">
                                 <rect key="frame" x="0.0" y="682" width="375" height="50"/>
-                                <color key="backgroundColor" red="0.8579367995262146" green="0.79744523763656616" blue="0.72155672311782837" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                <color key="backgroundColor" red="0.9212072491645813" green="0.84832113981246948" blue="0.62377804517745972" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="50" id="lbo-7k-e6o"/>
                                 </constraints>
@@ -36,7 +36,7 @@
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="2Qv-PI-2tL">
                                 <rect key="frame" x="0.0" y="732" width="375" height="50"/>
-                                <color key="backgroundColor" red="0.40681791305541992" green="0.27166584134101868" blue="0.21175110340118408" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                <color key="backgroundColor" red="0.29085952043533325" green="0.20994566380977631" blue="0.14615128934383392" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="50" id="GhK-9D-9J3"/>
                                 </constraints>
@@ -135,7 +135,7 @@
                                     </textField>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="mfd-Ns-3OP">
                                         <rect key="frame" x="0.0" y="126" width="343" height="30"/>
-                                        <color key="backgroundColor" red="0.8579367995262146" green="0.79744523763656616" blue="0.72155672311782837" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                        <color key="backgroundColor" red="0.9212072491645813" green="0.84832113981246948" blue="0.62377804517745972" alpha="1" colorSpace="calibratedRGB"/>
                                         <state key="normal" title="Crear cuenta">
                                             <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         </state>
@@ -148,7 +148,7 @@
                                         <subviews>
                                             <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="hkM-lW-QG1">
                                                 <rect key="frame" x="0.0" y="0.0" width="51" height="31"/>
-                                                <color key="onTintColor" red="0.40681791309999998" green="0.27166584129999999" blue="0.2117511034" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                                <color key="onTintColor" red="0.56465393304824829" green="0.45339596271514893" blue="0.35711643099784851" alpha="1" colorSpace="calibratedRGB"/>
                                             </switch>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Aceptas la política de datos de la empresa" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="tLy-pJ-Ybq">
                                                 <rect key="frame" x="61" y="0.0" width="282" height="31"/>
@@ -214,7 +214,7 @@
                                     </textField>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="IZ2-eX-n2C">
                                         <rect key="frame" x="0.0" y="84" width="343" height="30"/>
-                                        <color key="backgroundColor" red="0.40681791309999998" green="0.27166584129999999" blue="0.2117511034" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                        <color key="backgroundColor" red="0.29085952043533325" green="0.20994566380977631" blue="0.14615128934383392" alpha="1" colorSpace="calibratedRGB"/>
                                         <state key="normal" title="Entrar ahora">
                                             <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         </state>
@@ -261,8 +261,8 @@
                                 <rect key="frame" x="0.0" y="88" width="375" height="644"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             </tableView>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="SAl-Em-xho">
-                                <rect key="frame" x="0.0" y="732" width="375" height="80"/>
+                            <view contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="SAl-Em-xho">
+                                <rect key="frame" x="0.0" y="733" width="375" height="80"/>
                                 <subviews>
                                     <stackView opaque="NO" contentMode="scaleToFill" distribution="fillProportionally" spacing="16" translatesAutoresizingMaskIntoConstraints="NO" id="ubc-Zq-K8z">
                                         <rect key="frame" x="8" y="8" width="359" height="30"/>
@@ -297,7 +297,7 @@
                                         </constraints>
                                     </stackView>
                                 </subviews>
-                                <color key="backgroundColor" red="0.40681791309999998" green="0.27166584129999999" blue="0.2117511034" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                <color key="backgroundColor" red="0.56465393304824829" green="0.45339596271514893" blue="0.35711643099784851" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
                                     <constraint firstItem="ubc-Zq-K8z" firstAttribute="top" secondItem="SAl-Em-xho" secondAttribute="top" constant="8" id="BZ9-vK-f6C"/>
                                     <constraint firstAttribute="trailing" secondItem="ubc-Zq-K8z" secondAttribute="trailing" constant="8" id="P0E-Kb-HIZ"/>
@@ -320,7 +320,7 @@
                     </view>
                     <navigationItem key="navigationItem" title="Chat" id="C8u-c9-Q4k">
                         <barButtonItem key="rightBarButtonItem" title="Salir" id="mTu-5U-ez5">
-                            <color key="tintColor" red="0.40681791309999998" green="0.27166584129999999" blue="0.2117511034" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                            <color key="tintColor" red="0.2418571412563324" green="0.17698898911476135" blue="0.1230514720082283" alpha="1" colorSpace="calibratedRGB"/>
                             <connections>
                                 <action selector="logoutPressed:" destination="A0K-VW-7VC" id="KaT-ce-nVI"/>
                             </connections>

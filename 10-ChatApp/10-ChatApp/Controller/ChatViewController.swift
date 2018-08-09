@@ -8,6 +8,7 @@
 
 import UIKit
 import Firebase
+import ChameleonFramework
 
 class ChatViewController: UIViewController, UITableViewDataSource, UITableViewDelegate, UITextFieldDelegate {
 
@@ -21,18 +22,25 @@ class ChatViewController: UIViewController, UITableViewDataSource, UITableViewDe
 
         self.messagesTableView.delegate = self
         self.messagesTableView.dataSource = self
+        self.messageTextField.delegate = self
+
         
         let tapGesture = UITapGestureRecognizer(target: self, action: #selector(hideMessageZone))
         self.messagesTableView.addGestureRecognizer(tapGesture)
         
+        
         self.messagesTableView.register(UINib(nibName: "MessageCell", bundle: nil), forCellReuseIdentifier: "MessageCellID")
+        self.messagesTableView.separatorStyle = .none
         
-        self.messagesTableView.rowHeight = UITableView.automaticDimension
-        self.messagesTableView.estimatedRowHeight = 120
-        
-        self.messageTextField.delegate = self
+        configureTableView()
+        retrieveMessagesFromFirebase()
     }
     
+    //Establece el tamaño correcto para cada una de las celdas de la tabla
+    func configureTableView() {
+        self.messagesTableView.rowHeight = UITableView.automaticDimension
+        self.messagesTableView.estimatedRowHeight = 120
+    }
 
     /*
     // MARK: - Navigation
@@ -89,12 +97,30 @@ class ChatViewController: UIViewController, UITableViewDataSource, UITableViewDe
         
     }
     
+    //Establecemos un observador del evento .childAdded de la base de datos Messages de Firebase para saber cuando se añade un nuevo
+    //mensaje a dicha table del servidor.
+    func retrieveMessagesFromFirebase(){
+        let messagesDB = Database.database().reference().child("Messages")
+        messagesDB.observe(.childAdded) { (snapshot) in
+            let snpValue = snapshot.value as! Dictionary<String, String>
+            
+            let sender = snpValue["sender"]!
+            let body = snpValue["body"]!
+            
+            let message = Message(sender: sender, body: body)
+            self.messagesArray.append(message)
+            
+            self.configureTableView()
+            self.messagesTableView.reloadData()
+        }
+        
+        
+    }
+    
     
     
     /*MARK: - UITableViewDataSource */
-    let messagesArray : [Message]  = [
-        Message(), Message(), Message(), Message()
-    ]
+    var messagesArray : [Message]  = [Message]()
 
     func numberOfSections(in tableView: UITableView) -> Int {
         return 1
@@ -109,6 +135,17 @@ class ChatViewController: UIViewController, UITableViewDataSource, UITableViewDe
         
         cell.usernameLabel.text = messagesArray[indexPath.row].sender
         cell.messageLabel.text = messagesArray[indexPath.row].body
+        cell.messageImageView.image = UIImage(named: "avatar")
+        
+        if cell.usernameLabel.text == Auth.auth().currentUser?.email {
+            cell.messageImageView.backgroundColor = UIColor.flatLime()
+            cell.nessageBackground.backgroundColor = UIColor.flatSkyBlue()
+        }else {
+            cell.messageImageView.backgroundColor = UIColor.flatWatermelon()
+            cell.nessageBackground.backgroundColor = UIColor.flatGray()
+        }
+        
+        
         return cell
     }
     
