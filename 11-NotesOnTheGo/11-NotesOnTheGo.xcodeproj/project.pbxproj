@@ -14,6 +14,7 @@
 		010360D6211C9365008B1BD6 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 010360D4211C9365008B1BD6 /* LaunchScreen.storyboard */; };
 		010784A5212089370079CA47 /* NotesTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 010784A4212089370079CA47 /* NotesTableViewController.swift */; };
 		010784A721208E0E0079CA47 /* CategoryCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 010784A621208E0E0079CA47 /* CategoryCollectionViewCell.swift */; };
+		010784AA2121A0A60079CA47 /* Note.swift in Sources */ = {isa = PBXBuildFile; fileRef = 010784A92121A0A60079CA47 /* Note.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -26,6 +27,7 @@
 		010360D7211C9365008B1BD6 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		010784A4212089370079CA47 /* NotesTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotesTableViewController.swift; sourceTree = "<group>"; };
 		010784A621208E0E0079CA47 /* CategoryCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryCollectionViewCell.swift; sourceTree = "<group>"; };
+		010784A92121A0A60079CA47 /* Note.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Note.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -69,6 +71,7 @@
 		010360DD211C9380008B1BD6 /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				010784A92121A0A60079CA47 /* Note.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -173,6 +176,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				010784AA2121A0A60079CA47 /* Note.swift in Sources */,
 				010784A721208E0E0079CA47 /* CategoryCollectionViewCell.swift in Sources */,
 				010360CE211C9364008B1BD6 /* CategoriesViewController.swift in Sources */,
 				010360CC211C9364008B1BD6 /* AppDelegate.swift in Sources */,
