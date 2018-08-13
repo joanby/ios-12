@@ -14,6 +14,7 @@ class CategoriesViewController: UICollectionViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        print("Categories VC cargado")
     }
     
     
