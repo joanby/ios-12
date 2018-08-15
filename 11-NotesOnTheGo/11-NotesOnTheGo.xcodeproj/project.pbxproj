@@ -14,7 +14,10 @@
 		010360D6211C9365008B1BD6 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 010360D4211C9365008B1BD6 /* LaunchScreen.storyboard */; };
 		010784A5212089370079CA47 /* NotesTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 010784A4212089370079CA47 /* NotesTableViewController.swift */; };
 		010784A721208E0E0079CA47 /* CategoryCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 010784A621208E0E0079CA47 /* CategoryCollectionViewCell.swift */; };
-		010784AA2121A0A60079CA47 /* Note.swift in Sources */ = {isa = PBXBuildFile; fileRef = 010784A92121A0A60079CA47 /* Note.swift */; };
+		013243332121C5AF00E05338 /* NotesDataModel.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 013243312121C5AF00E05338 /* NotesDataModel.xcdatamodeld */; };
+		01D9CAC62124333E0034A3BF /* NewCategoryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01D9CAC52124333E0034A3BF /* NewCategoryViewController.swift */; };
+		01DD906E212326F100D3C9B7 /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01DD906D212326F100D3C9B7 /* Extensions.swift */; };
+		01DD907021232B8D00D3C9B7 /* Category.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01DD906F21232B8D00D3C9B7 /* Category.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -27,7 +30,10 @@
 		010360D7211C9365008B1BD6 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		010784A4212089370079CA47 /* NotesTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotesTableViewController.swift; sourceTree = "<group>"; };
 		010784A621208E0E0079CA47 /* CategoryCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryCollectionViewCell.swift; sourceTree = "<group>"; };
-		010784A92121A0A60079CA47 /* Note.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Note.swift; sourceTree = "<group>"; };
+		013243322121C5AF00E05338 /* NotesDataModel.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = NotesDataModel.xcdatamodel; sourceTree = "<group>"; };
+		01D9CAC52124333E0034A3BF /* NewCategoryViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewCategoryViewController.swift; sourceTree = "<group>"; };
+		01DD906D212326F100D3C9B7 /* Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
+		01DD906F21232B8D00D3C9B7 /* Category.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Category.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -71,7 +77,8 @@
 		010360DD211C9380008B1BD6 /* Model */ = {
 			isa = PBXGroup;
 			children = (
-				010784A92121A0A60079CA47 /* Note.swift */,
+				013243312121C5AF00E05338 /* NotesDataModel.xcdatamodeld */,
+				01DD906F21232B8D00D3C9B7 /* Category.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -79,6 +86,7 @@
 		010360DE211C9385008B1BD6 /* View */ = {
 			isa = PBXGroup;
 			children = (
+				01DD906D212326F100D3C9B7 /* Extensions.swift */,
 				010360CF211C9364008B1BD6 /* Main.storyboard */,
 				010360D4211C9365008B1BD6 /* LaunchScreen.storyboard */,
 				010784A621208E0E0079CA47 /* CategoryCollectionViewCell.swift */,
@@ -92,6 +100,7 @@
 				010360CB211C9364008B1BD6 /* AppDelegate.swift */,
 				010360CD211C9364008B1BD6 /* CategoriesViewController.swift */,
 				010784A4212089370079CA47 /* NotesTableViewController.swift */,
+				01D9CAC52124333E0034A3BF /* NewCategoryViewController.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -176,11 +185,14 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				010784AA2121A0A60079CA47 /* Note.swift in Sources */,
+				013243332121C5AF00E05338 /* NotesDataModel.xcdatamodeld in Sources */,
+				01D9CAC62124333E0034A3BF /* NewCategoryViewController.swift in Sources */,
+				01DD906E212326F100D3C9B7 /* Extensions.swift in Sources */,
 				010784A721208E0E0079CA47 /* CategoryCollectionViewCell.swift in Sources */,
 				010360CE211C9364008B1BD6 /* CategoriesViewController.swift in Sources */,
 				010360CC211C9364008B1BD6 /* AppDelegate.swift in Sources */,
 				010784A5212089370079CA47 /* NotesTableViewController.swift in Sources */,
+				01DD907021232B8D00D3C9B7 /* Category.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -380,6 +392,19 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCVersionGroup section */
+		013243312121C5AF00E05338 /* NotesDataModel.xcdatamodeld */ = {
+			isa = XCVersionGroup;
+			children = (
+				013243322121C5AF00E05338 /* NotesDataModel.xcdatamodel */,
+			);
+			currentVersion = 013243322121C5AF00E05338 /* NotesDataModel.xcdatamodel */;
+			path = NotesDataModel.xcdatamodeld;
+			sourceTree = "<group>";
+			versionGroupType = wrapper.xcdatamodel;
+		};
+/* End XCVersionGroup section */
 	};
 	rootObject = 010360C0211C9364008B1BD6 /* Project object */;
 }

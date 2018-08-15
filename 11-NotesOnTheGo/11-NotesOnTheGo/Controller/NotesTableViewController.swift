@@ -7,17 +7,24 @@
 //
 
 import UIKit
+import CoreData
 
 class NotesTableViewController: UITableViewController {
     
     var notesArray = [Note]()
+    var selectedCategory : Category?{
+        didSet{
+            loadNotes()
+        }
+    }
     
     let dataFilePath = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first?.appendingPathComponent("Notes.plist")
+    let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
 
-    
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        self.navigationItem.title = selectedCategory?.title
         loadNotes()
     }
 
@@ -94,9 +101,14 @@ class NotesTableViewController: UITableViewController {
         let note = notesArray[indexPath.row]
         note.checked = (note.checked ? false : true)
         
+        /* MARK: - Borrado de Core Data
+         context.delete(notesArray[indexPath.row])
+        notesArray.remove(at: indexPath.row)
+        */
+        
         persistNotes()
         
-        tableView.cellForRow(at: indexPath)?.accessoryType = (note.checked ? .checkmark : .none)
+        //tableView.cellForRow(at: indexPath)?.accessoryType = (note.checked ? .checkmark : .none)
         
         tableView.deselectRow(at: indexPath, animated: true)
     }
@@ -123,8 +135,9 @@ class NotesTableViewController: UITableViewController {
         
         let addAction = UIAlertAction(title: "Añadir item", style: .default) { (action) in
             //TODO: Recuperar lo que haya escrito el usuario en el textfield cuando pulsa el botón Añadir
-            let note = Note()
+            let note = Note(context: self.context)
             note.title = textField.text!
+            note.parentCategory = self.selectedCategory
             self.notesArray.append(note)
             self.persistNotes()
         }
@@ -146,20 +159,26 @@ class NotesTableViewController: UITableViewController {
     
     //MARK: - Data persistence and manipulation
     func persistNotes() {
-        let encoder = PropertyListEncoder()
+        /*let encoder = PropertyListEncoder()
         do{
             let data = try encoder.encode(self.notesArray)
             try data.write(to: self.dataFilePath!)
         } catch {
             print("Error al codificar y guardar el array:\(error)")
+        }*/
+        
+        do{
+            try context.save()
+        }catch{
+            print("Error al intentar guardar el contexto: \(error)")
         }
         
         self.tableView.reloadData()
     }
     
     
-    func loadNotes(){
-        if let data = try? Data(contentsOf: dataFilePath!){
+    func loadNotes(from request: NSFetchRequest<Note> = Note.fetchRequest(), predicate: NSPredicate? = nil){
+        /*if let data = try? Data(contentsOf: dataFilePath!){
             
             let decoder = PropertyListDecoder()
             do{
@@ -167,8 +186,52 @@ class NotesTableViewController: UITableViewController {
             }catch{
                 print("Error descodificando el array de notas \(error)")
             }
-            
+        }*/
+        
+        let categoryPredicate = NSPredicate(format: "parentCategory.title MATCHES %@", selectedCategory!.title!)
+
+        if let previousPredicte = predicate{
+            //aquí tenemos un predicado de búsqueda previo
+            let compoundPredicate = NSCompoundPredicate(andPredicateWithSubpredicates: [previousPredicte, categoryPredicate])
+            request.predicate = compoundPredicate
+        } else {
+            request.predicate = categoryPredicate
         }
+        
+        
+        do {
+            notesArray = try context.fetch(request)
+        } catch {
+            print("Error al recuperar datos de Core Data \(error)")
+        }
+        
+        tableView.reloadData()
     }
     
+}
+
+
+//MARK: - Métodos de la Search Bar
+extension NotesTableViewController : UISearchBarDelegate{
+    func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
+        let searchText = searchBar.text!
+        
+        let request : NSFetchRequest<Note> = Note.fetchRequest()
+        
+        let predicate = NSPredicate(format: "title CONTAINS[cd] %@", searchText)
+        
+        let sortDescription = NSSortDescriptor(key: "title", ascending: true)
+        request.sortDescriptors = [sortDescription]
+        
+        loadNotes(from: request, predicate: predicate)
+    }
+    
+    func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
+        if searchBar.text?.count == 0 {
+            loadNotes()
+            DispatchQueue.main.async {
+                searchBar.resignFirstResponder()
+            }
+        }
+    }
 }

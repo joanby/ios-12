@@ -12,13 +12,13 @@
 		01138CCA20EBD4CC00A2F61C /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 01138CC820EBD4CC00A2F61C /* Main.storyboard */; };
 		01138CCC20EBD4CD00A2F61C /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 01138CCB20EBD4CD00A2F61C /* Assets.xcassets */; };
 		01138CCF20EBD4CD00A2F61C /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 01138CCD20EBD4CD00A2F61C /* LaunchScreen.storyboard */; };
-		01138CDB20EBDB1700A2F61C /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01138CDA20EBDB1700A2F61C /* Extensions.swift */; };
 		01138CDD20EBE3B300A2F61C /* Question.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01138CDC20EBE3B300A2F61C /* Question.swift */; };
 		01138CDF20ECC2CD00A2F61C /* QuestionsFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01138CDE20ECC2CD00A2F61C /* QuestionsFactory.swift */; };
 		01498F2F20F0EA67004014B9 /* ProgressHUD.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 01498F2D20F0EA67004014B9 /* ProgressHUD.bundle */; };
 		01498F3020F0EA67004014B9 /* ProgressHUD.m in Sources */ = {isa = PBXBuildFile; fileRef = 01498F2E20F0EA67004014B9 /* ProgressHUD.m */; };
 		01498F3120F0ED91004014B9 /* QuestionsBank.plist in Resources */ = {isa = PBXBuildFile; fileRef = 01498F3320F0ED91004014B9 /* QuestionsBank.plist */; };
 		01498F3B20F11CCB004014B9 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 01498F3D20F11CCB004014B9 /* Localizable.strings */; };
+		01DD907221242FAF00D3C9B7 /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01DD907121242FAF00D3C9B7 /* Extensions.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -29,7 +29,6 @@
 		01138CCB20EBD4CD00A2F61C /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		01138CCE20EBD4CD00A2F61C /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		01138CD020EBD4CD00A2F61C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		01138CDA20EBDB1700A2F61C /* Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Extensions.swift; path = "../../../04-Piano/04-Piano/Extensions.swift"; sourceTree = "<group>"; };
 		01138CDC20EBE3B300A2F61C /* Question.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Question.swift; sourceTree = "<group>"; };
 		01138CDE20ECC2CD00A2F61C /* QuestionsFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuestionsFactory.swift; sourceTree = "<group>"; };
 		01498F2B20F0EA66004014B9 /* 05-QuizApp-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "05-QuizApp-Bridging-Header.h"; sourceTree = "<group>"; };
@@ -46,6 +45,7 @@
 		01498F3F20F11D8A004014B9 /* es */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = es; path = es.lproj/Main.strings; sourceTree = "<group>"; };
 		01498F4020F11D8A004014B9 /* es */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = es; path = es.lproj/QuestionsBank.plist; sourceTree = "<group>"; };
 		01498F4120F11D8A004014B9 /* es */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = es; path = es.lproj/Localizable.strings; sourceTree = "<group>"; };
+		01DD907121242FAF00D3C9B7 /* Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -98,7 +98,7 @@
 		01138CD720EBD7C800A2F61C /* View */ = {
 			isa = PBXGroup;
 			children = (
-				01138CDA20EBDB1700A2F61C /* Extensions.swift */,
+				01DD907121242FAF00D3C9B7 /* Extensions.swift */,
 				01138CC820EBD4CC00A2F61C /* Main.storyboard */,
 				01138CCB20EBD4CD00A2F61C /* Assets.xcassets */,
 			);
@@ -207,10 +207,10 @@
 			buildActionMask = 2147483647;
 			files = (
 				01498F3020F0EA67004014B9 /* ProgressHUD.m in Sources */,
+				01DD907221242FAF00D3C9B7 /* Extensions.swift in Sources */,
 				01138CC720EBD4CC00A2F61C /* ViewController.swift in Sources */,
 				01138CDF20ECC2CD00A2F61C /* QuestionsFactory.swift in Sources */,
 				01138CDD20EBE3B300A2F61C /* Question.swift in Sources */,
-				01138CDB20EBDB1700A2F61C /* Extensions.swift in Sources */,
 				01138CC520EBD4CC00A2F61C /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

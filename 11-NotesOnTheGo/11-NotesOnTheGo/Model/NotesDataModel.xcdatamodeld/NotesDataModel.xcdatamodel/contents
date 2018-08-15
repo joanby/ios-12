@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="14315.2.4" systemVersion="18A347e" minimumToolsVersion="Automatic" sourceLanguage="Swift" userDefinedModelVersionIdentifier="">
+    <entity name="Category" representedClassName=".Category" syncable="YES" codeGenerationType="class">
+        <attribute name="colorHex" attributeType="String" syncable="YES"/>
+        <attribute name="image" attributeType="Binary" syncable="YES"/>
+        <attribute name="title" attributeType="String" syncable="YES"/>
+        <relationship name="notes" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Note" inverseName="parentCategory" inverseEntity="Note" syncable="YES"/>
+    </entity>
+    <entity name="Note" representedClassName=".Note" syncable="YES" codeGenerationType="class">
+        <attribute name="checked" attributeType="Boolean" defaultValueString="NO" usesScalarValueType="YES" syncable="YES"/>
+        <attribute name="title" attributeType="String" syncable="YES"/>
+        <relationship name="parentCategory" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Category" inverseName="notes" inverseEntity="Category" syncable="YES"/>
+    </entity>
+    <elements>
+        <element name="Category" positionX="-2356.609375" positionY="-404.4140625" width="128" height="105"/>
+        <element name="Note" positionX="-2167.9765625" positionY="-419.3359375" width="122.40625" height="90"/>
+    </elements>
+</model>
