@@ -25,6 +25,7 @@ class NotesTableViewController: UITableViewController {
         super.viewDidLoad()
         
         self.navigationItem.title = selectedCategory?.title
+        self.navigationItem.hidesSearchBarWhenScrolling = true
         loadNotes()
     }
 

@@ -15,6 +15,14 @@ class CategoriesViewController: UICollectionViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        /*navigationController?.navigationBar.prefersLargeTitles = true
+        navigationController?.navigationItem.largeTitleDisplayMode = .automatic
+        
+        navigationController?.navigationBar.largeTitleTextAttributes = [
+            NSAttributedString.Key.foregroundColor : UIColor.blue,
+            NSAttributedString.Key.font : UIFont(name: "Papyrus", size: 24.0) ?? UIFont.systemFont(ofSize: 24.0)
+        ]*/
         print("Categories VC cargado")
     }
     
