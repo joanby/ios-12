@@ -1,0 +1,44 @@
+{
+	"BalsaDeMedusa": {
+		"title": "La Balsa de Medusa",
+		"artist": "Théodore Géricault",
+		"year": "1819",
+		"url": "https://es.wikipedia.org/wiki/La_balsa_de_la_Medusa"
+	},
+	"ConsagracionDeNapoleon": {
+		"title": "La consagración de Napoleón",
+		"artist": "Jacques-Louis David",
+		"year": "1807",
+		"url": "https://es.wikipedia.org/wiki/La_consagraci%F3n_de_Napole%F3n"
+	},
+	"JuramentoDeLosHoracios": {
+		"title": "Juramento de los Horacios",
+		"artist": "Jacques-Louis David",
+		"year": "1784",
+		"url": "https://es.wikipedia.org/wiki/Juramento_de_los_Horacios"
+	},
+	"LibertadGuiandoAlPueblo": {
+		"title": "La Libertad guiando al pueblo",
+		"artist": "Eugène Delacroix",
+		"year": "1830",
+		"url": "https://es.wikipedia.org/wiki/La_Libertad_guiando_al_pueblo"
+	},
+	"LuisXIV": {
+		"title": "Retrato de Luis XIV",
+		"artist": "Hyacinthe Rigaud",
+		"year": "1701",
+		"url": "https://es.wikipedia.org/wiki/Retrato_de_Luis_XIV"
+	},
+	"MonaLisa": {
+		"title": "La Gioconda",
+		"artist": "Leonardo da Vinci",
+		"year": "1517",
+		"url": "https://es.wikipedia.org/wiki/La_Gioconda"
+	},
+	"SanJuanBautista": {
+		"title": "San Juan Bautista (Leonardo)",
+		"artist": "Leonardo da Vinci",
+		"year": "1516",
+		"url": "https://es.wikipedia.org/wiki/San_Juan_Bautista_(Leonardo)"
+	}
+}
