@@ -1,0 +1,32 @@
+[
+	{
+		"name": "Donuts",
+		"description": "Masa dulce en forma de rosquilla que tanto adora Homer Simpson.",
+		"price": 2
+	},
+	{
+		"name": "Croisant",
+		"description": "Recién horneado y desde París directo a tu paladar.",
+		"price": 5
+	},
+	{
+		"name": "Palmera",
+		"description": "El dulce de hojaldre por excelencia con el que tendrás migas hasta en el cerebro.",
+		"price": 3
+	},
+	{
+		"name": "Ensaimada",
+		"description": "Dulce típico de Mallorca con un precio desorbitado pero que encanta a todo el que lo prueba.",
+		"price": 9
+	},
+	{
+		"name": "Brioche",
+		"description": "Un dulce relleno de crema pastelera muy rica.",
+		"price": 4
+	},
+	{
+		"name": "Pastel",
+		"description": "Pastel de chocolate blanco, chocolate negro y un toque de café que te transportará al lado oscuro de los dulces.",
+		"price": 12
+	}
+]

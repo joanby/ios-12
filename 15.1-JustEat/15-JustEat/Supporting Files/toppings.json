@@ -1,0 +1,37 @@
+[
+	{
+		"name": "Virutas de Chocolate Blanco",
+		"description": "Virutas de azúcar con un ligero toque de chocolate blanco.",
+		"price": 2
+	},
+	{
+		"name": "Virutas de Chocolate Negro",
+		"description": "Virutas de azúcar con un ligero toque de chocolate negro.",
+		"price": 1
+	},
+	{
+		"name": "Cacao en Polvo",
+		"description": "Cacao recién tomado del árbol para espolvorearlo sobre tu dulce favorito.",
+		"price": 2
+	},
+	{
+		"name": "Virutas de Colores",
+		"description": "Virutas de azúcar de todos los colores para alegrarte el día.",
+		"price": 3
+	},
+	{
+		"name": "Velas de Cumpleaños",
+		"description": "Celebra ese momento especial de alguien con unas velas y sóplalas para cumplir todos sus deseos.",
+		"price": 3
+	},
+	{
+		"name": "Doble Glaseado",
+		"description": "Pon el doble de glaseado frosting encima de tu dulce.",
+		"price": 3
+	},
+	{
+		"name": "Triple Glaseado",
+		"description": "Pon tanto glaseado frosting encima de tu dulce que apenas se verá.",
+		"price": 5
+	}
+]
