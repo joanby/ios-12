@@ -56,7 +56,7 @@ class PageViewController: UIPageViewController, UIPageViewControllerDataSource, 
     // MARK: - Métodos de UIPageViewController Data Source para saber los VC de antes y de después
     func pageViewController(_ pageViewController: UIPageViewController, viewControllerBefore viewController: UIViewController) -> UIViewController? {
         
-        guard let viewControllerIndex = self.pageViewControllers.index(of: viewController) else {
+        guard let viewControllerIndex = self.pageViewControllers.firstIndex(of: viewController) else {
             return nil
         }
         
@@ -70,7 +70,7 @@ class PageViewController: UIPageViewController, UIPageViewControllerDataSource, 
     }
     
     func pageViewController(_ pageViewController: UIPageViewController, viewControllerAfter viewController: UIViewController) -> UIViewController? {
-        guard let viewControllerIndex = self.pageViewControllers.index(of: viewController) else {
+        guard let viewControllerIndex = self.pageViewControllers.firstIndex(of: viewController) else {
             return nil
         }
         
@@ -85,7 +85,7 @@ class PageViewController: UIPageViewController, UIPageViewControllerDataSource, 
     // MARK: - Método de UIPageViewControllerDelegate
     func pageViewController(_ pageViewController: UIPageViewController, didFinishAnimating finished: Bool, previousViewControllers: [UIViewController], transitionCompleted completed: Bool) {
         let currentViewController = pageViewController.viewControllers![0]
-        self.pageControl.currentPage = self.pageViewControllers.index(of: currentViewController)!
+        self.pageControl.currentPage = self.pageViewControllers.firstIndex(of: currentViewController)!
     }
 
 }

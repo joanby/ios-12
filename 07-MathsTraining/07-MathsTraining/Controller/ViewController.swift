@@ -20,7 +20,17 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
     
     let factory = QuestionsFactory()
     
-    var mnistModel = MnistModel()
+    //var mnistModel = MnistModel()
+    //UPDATE 2023
+    let mnistModel: MnistModel = {
+    do {
+        let config = MLModelConfiguration()
+        return try MnistModel(configuration: config)
+    } catch {
+        print(error)
+        fatalError("Couldn't create MNIST MODEL")
+    }
+    }()
     
     var gameTimer : Timer!
 

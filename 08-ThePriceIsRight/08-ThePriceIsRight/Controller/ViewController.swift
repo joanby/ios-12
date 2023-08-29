@@ -7,9 +7,19 @@
 //
 
 import UIKit
+import CoreML
 
-let model = HousePriceModel()
-
+//let model = HousePriceModel()
+//UPDATE 2023
+let model: HousePriceModel = {
+    do {
+        let config = MLModelConfiguration()
+        return try HousePriceModel(configuration: config)
+    } catch {
+        print(error)
+        fatalError("Couldn't create SleepCalculator")
+    }
+}()
 
 class ViewController: UIViewController {
 
