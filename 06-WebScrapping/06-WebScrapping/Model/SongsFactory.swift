@@ -43,7 +43,7 @@ class SongsFactory {
             
             let doc = try Kanna.HTML(html: html, encoding: String.Encoding.utf8)
             
-            print(doc.title)
+            //print(doc.title)
             //print(doc.head)
             //print(doc.body)
             

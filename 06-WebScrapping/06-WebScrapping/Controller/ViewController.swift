@@ -13,7 +13,7 @@ import Kanna
 
 class ViewController: UICollectionViewController {
 
-    let urlName = "https://www.apple.com/itunes/charts/songs"//"http://juangabrielgomila.com/blog/"
+    let urlName =  "https://www.apple.com/itunes/charts/songs"//"http://juangabrielgomila.com/blog/"
     
     var factory : SongsFactory!
     
@@ -35,7 +35,7 @@ class ViewController: UICollectionViewController {
     }
    
     override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        //print(factory.songs.count)
+        print(factory.songs.count)
         
         return factory.songs.count
     }

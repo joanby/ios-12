@@ -7,7 +7,7 @@ DEPENDENCIES:
   - Kanna (from `https://github.com/tid-kijyun/Kanna`, branch `feature/v4.0.0`)
 
 SPEC REPOS:
-  https://github.com/cocoapods/specs.git:
+  trunk:
     - Alamofire
 
 EXTERNAL SOURCES:
@@ -26,4 +26,4 @@ SPEC CHECKSUMS:
 
 PODFILE CHECKSUM: 68fa28dd1d819588401ba1cf389318de0f69d6d2
 
-COCOAPODS: 1.5.2
+COCOAPODS: 1.12.1

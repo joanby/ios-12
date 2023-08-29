@@ -1,6 +1,6 @@
 # Proyectos del curso completo de iOS 12 de JB
 
-[Ver el curso completo en Udemy](https://www.udemy.com/curso-completo-de-ios-12-de-cero-a-experto/)
+[Ver el curso completo en Frogames Formación](https://cursos.frogamesformacion.com/courses/ios-12)
 
 ## Proyecto 1 - I am Rich
 Clon de la app de los 999$ (https://en.wikipedia.org/wiki/I_Am_Rich) que marcó un antes y un después en la forma de vender las apps en la App Store. 
@@ -43,7 +43,12 @@ Un clon del mítico juego **Space Invaders** donde los enemigos invasores serán
 Conectividad, servidores, información, registros se dan cita en una app 100% basada en Firebase, el servidor en la nube gratuito de Google que nos permite crear apps multiplataforma sin casi despeinarnos
 
 ## Proyecto 11 - Mis notas con Realm
-*COMING SOON*
 
-## Proyecto 12 - PDF Invoce on the go
-*COMING SOON*
+## Proyecto 12 - Layouts
+
+## Proyecto 13 - Aritmética con AR
+
+## Proyecto 14 - Museos e Imágenes con AR
+
+## Proyecto 15 - Clon de Just Eat
+

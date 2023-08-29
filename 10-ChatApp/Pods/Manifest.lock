@@ -16,13 +16,13 @@ PODS:
   - FirebaseAnalytics (4.0.2):
     - FirebaseCore (~> 4.0)
     - FirebaseInstanceID (~> 2.0)
-    - GoogleToolboxForMac/NSData+zlib (~> 2.1)
+    - "GoogleToolboxForMac/NSData+zlib (~> 2.1)"
   - FirebaseAuth (4.0.0):
     - FirebaseAnalytics (~> 4.0)
-    - GoogleToolboxForMac/NSDictionary+URLArguments (~> 2.1)
+    - "GoogleToolboxForMac/NSDictionary+URLArguments (~> 2.1)"
     - GTMSessionFetcher/Core (~> 1.1)
   - FirebaseCore (4.0.4):
-    - GoogleToolboxForMac/NSData+zlib (~> 2.1)
+    - "GoogleToolboxForMac/NSData+zlib (~> 2.1)"
     - nanopb (~> 0.3)
   - FirebaseDatabase (4.0.0):
     - FirebaseAnalytics (~> 4.0)
@@ -31,13 +31,13 @@ PODS:
   - GoogleToolboxForMac/DebugUtils (2.1.1):
     - GoogleToolboxForMac/Defines (= 2.1.1)
   - GoogleToolboxForMac/Defines (2.1.1)
-  - GoogleToolboxForMac/NSData+zlib (2.1.1):
+  - "GoogleToolboxForMac/NSData+zlib (2.1.1)":
     - GoogleToolboxForMac/Defines (= 2.1.1)
-  - GoogleToolboxForMac/NSDictionary+URLArguments (2.1.1):
+  - "GoogleToolboxForMac/NSDictionary+URLArguments (2.1.1)":
     - GoogleToolboxForMac/DebugUtils (= 2.1.1)
     - GoogleToolboxForMac/Defines (= 2.1.1)
-    - GoogleToolboxForMac/NSString+URLArguments (= 2.1.1)
-  - GoogleToolboxForMac/NSString+URLArguments (2.1.1)
+    - "GoogleToolboxForMac/NSString+URLArguments (= 2.1.1)"
+  - "GoogleToolboxForMac/NSString+URLArguments (2.1.1)"
   - GTMSessionFetcher/Core (1.1.11)
   - nanopb (0.3.8):
     - nanopb/decode (= 0.3.8)
@@ -52,6 +52,20 @@ DEPENDENCIES:
   - Firebase/Auth
   - Firebase/Database
   - SVProgressHUD
+
+SPEC REPOS:
+  trunk:
+    - ChameleonFramework
+    - Firebase
+    - FirebaseAnalytics
+    - FirebaseAuth
+    - FirebaseCore
+    - FirebaseDatabase
+    - FirebaseInstanceID
+    - GoogleToolboxForMac
+    - GTMSessionFetcher
+    - nanopb
+    - SVProgressHUD
 
 SPEC CHECKSUMS:
   ChameleonFramework: d21a3cc247abfe5e37609a283a8238b03575cf64
@@ -68,4 +82,4 @@ SPEC CHECKSUMS:
 
 PODFILE CHECKSUM: 513dc8da6a04358a2709de2c336f04883de8de1c
 
-COCOAPODS: 1.4.0
+COCOAPODS: 1.12.1

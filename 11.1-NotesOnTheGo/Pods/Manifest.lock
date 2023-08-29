@@ -11,7 +11,7 @@ DEPENDENCIES:
   - SwipeCellKit (from `https://github.com/SwipeCellKit/SwipeCellKit.git`, branch `swift_4.2`)
 
 SPEC REPOS:
-  https://github.com/cocoapods/specs.git:
+  trunk:
     - Realm
     - RealmSwift
 
@@ -30,6 +30,6 @@ SPEC CHECKSUMS:
   RealmSwift: 1fe08b4ebaeeaacf17f9ba0343f7b25c9fc31fa6
   SwipeCellKit: cee9906e6d3a36e22ad1a852fba7f8fa0839d113
 
-PODFILE CHECKSUM: c7b0b389cbb65b157480831e4abdc28d170a63ef
+PODFILE CHECKSUM: 38bfc697267fa0917788a2adc798a1482c612890
 
-COCOAPODS: 1.5.2
+COCOAPODS: 1.12.1
