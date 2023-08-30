@@ -27,7 +27,7 @@ import Realm
 
  Property instances map to columns in the core database.
  */
-public struct Property: CustomStringConvertible {
+@frozen public struct Property: CustomStringConvertible {
     // MARK: Properties
 
     internal let rlmProperty: RLMProperty
@@ -35,11 +35,21 @@ public struct Property: CustomStringConvertible {
     /// The name of the property.
     public var name: String { return rlmProperty.name }
 
+    /// The column name of the property in the database. This will be the same as the property name when no
+    /// private name is provided on the property mapping.
+    public var columnName: String { return rlmProperty.columnName ?? name }
+
     /// The type of the property.
     public var type: PropertyType { return rlmProperty.type }
 
     /// Indicates whether this property is an array of the property type.
     public var isArray: Bool { return rlmProperty.array }
+
+    /// Indicates whether this property is a set of the property type.
+    public var isSet: Bool { return rlmProperty.set }
+
+    /// Indicates whether this property is a dictionary of the property type.
+    public var isMap: Bool { return rlmProperty.dictionary }
 
     /// Indicates whether this property is indexed.
     public var isIndexed: Bool { return rlmProperty.indexed }

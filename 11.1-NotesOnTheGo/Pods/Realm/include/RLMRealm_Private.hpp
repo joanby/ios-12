@@ -20,6 +20,10 @@
 
 #import "RLMClassInfo.hpp"
 
+#import <memory>
+
+RLM_HEADER_AUDIT_BEGIN(nullability, sendability)
+
 namespace realm {
     class Group;
     class Realm;
@@ -31,6 +35,12 @@ namespace realm {
     RLMSchemaInfo _info;
 }
 
-// FIXME - group should not be exposed
++ (instancetype)realmWithSharedRealm:(std::shared_ptr<realm::Realm>)sharedRealm
+                              schema:(nullable RLMSchema *)schema
+                             dynamic:(bool)dynamic
+    freeze:(bool)freeze NS_RETURNS_RETAINED;
+
 @property (nonatomic, readonly) realm::Group &group;
 @end
+
+RLM_HEADER_AUDIT_END(nullability, sendability)

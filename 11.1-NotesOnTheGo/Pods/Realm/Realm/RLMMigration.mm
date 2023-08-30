@@ -30,33 +30,15 @@
 #import "RLMSchema_Private.hpp"
 #import "RLMUtil.hpp"
 
-#import "object_store.hpp"
-#import "shared_realm.hpp"
-#import "schema.hpp"
-
+#import <realm/object-store/object_store.hpp>
+#import <realm/object-store/shared_realm.hpp>
+#import <realm/object-store/schema.hpp>
 #import <realm/table.hpp>
 
 using namespace realm;
 
-// The source realm for a migration has to use a SharedGroup to be able to share
-// the file with the destination realm, but we don't want to let the user call
-// beginWriteTransaction on it as that would make no sense.
-@interface RLMMigrationRealm : RLMRealm
-@end
-
-@implementation RLMMigrationRealm
-- (BOOL)readonly {
-    return YES;
-}
-
-- (void)beginWriteTransaction {
-    @throw RLMException(@"Cannot modify the source Realm in a migration");
-}
-@end
-
 @implementation RLMMigration {
     realm::Schema *_schema;
-    std::unordered_map<NSString *, realm::IndexSet> _deletedObjectIndices;
 }
 
 - (instancetype)initWithRealm:(RLMRealm *)realm oldRealm:(RLMRealm *)oldRealm schema:(realm::Schema &)schema {
@@ -65,7 +47,6 @@ using namespace realm;
         _realm = realm;
         _oldRealm = oldRealm;
         _schema = &schema;
-        object_setClass(_oldRealm, RLMMigrationRealm.class);
     }
     return self;
 }
@@ -87,44 +68,59 @@ using namespace realm;
     // objects. It's unclear how this could be useful, but changing it would
     // also be a pointless breaking change and it's unlikely to be hurting anyone.
     if (objects && !oldObjects) {
-        for (auto i = objects.count; i > 0; --i) {
+        for (RLMObject *object in objects) {
             @autoreleasepool {
-                block(nil, objects[i - 1]);
+                block(nil, object);
             }
         }
         return;
     }
-
-    auto count = oldObjects.count;
-    if (count == 0) {
+    
+    // If a table will be deleted it can still be enumerated during the migration
+    // so that data can be saved or transfered to other tables if necessary.
+    if (!objects && oldObjects) {
+        for (RLMObject *oldObject in oldObjects) {
+            @autoreleasepool {
+                block(oldObject, nil);
+            }
+        }
         return;
     }
-    auto deletedObjects = _deletedObjectIndices.find(className);
-    for (auto i = count; i > 0; --i) {
-        auto index = i - 1;
-        if (deletedObjects != _deletedObjectIndices.end() && deletedObjects->second.contains(index)) {
-            continue;
-        }
+    
+    if (oldObjects.count == 0 || objects.count == 0) {
+        return;
+    }
+
+    auto& info = _realm->_info[className];
+    for (RLMObject *oldObject in oldObjects) {
         @autoreleasepool {
-            block(oldObjects[index], objects[index]);
+            Obj newObj;
+            try {
+                newObj = info.table()->get_object(oldObject->_row.get_key());
+            }
+            catch (KeyNotFound const&) {
+                continue;
+            }
+            block(oldObject, (id)RLMCreateObjectAccessor(info, std::move(newObj)));
         }
     }
 }
 
-- (void)execute:(RLMMigrationBlock)block {
+- (void)execute:(RLMMigrationBlock)block objectClass:(Class)dynamicObjectClass {
+    if (!dynamicObjectClass) {
+        dynamicObjectClass = RLMDynamicObject.class;
+    }
     @autoreleasepool {
         // disable all primary keys for migration and use DynamicObject for all types
         for (RLMObjectSchema *objectSchema in _realm.schema.objectSchema) {
-            objectSchema.accessorClass = RLMDynamicObject.class;
+            objectSchema.accessorClass = dynamicObjectClass;
             objectSchema.primaryKeyProperty.isPrimary = NO;
         }
         for (RLMObjectSchema *objectSchema in _oldRealm.schema.objectSchema) {
-            objectSchema.accessorClass = RLMDynamicObject.class;
+            objectSchema.accessorClass = dynamicObjectClass;
         }
 
         block(self, _oldRealm->_realm->schema_version());
-
-        [self deleteObjectsMarkedForDeletion];
 
         _oldRealm = nil;
         _realm = nil;
@@ -140,31 +136,7 @@ using namespace realm;
 }
 
 - (void)deleteObject:(RLMObject *)object {
-    _deletedObjectIndices[object.objectSchema.className].add(object->_row.get_index());
-}
-
-- (void)deleteObjectsMarkedForDeletion {
-    for (auto& objectType : _deletedObjectIndices) {
-        TableRef table = ObjectStore::table_for_object_type(_realm.group, objectType.first.UTF8String);
-        if (!table) {
-            continue;
-        }
-
-        auto& indices = objectType.second;
-        // Just clear the table if we're removing all of the rows
-        if (table->size() == indices.count()) {
-            table->clear();
-        }
-        // Otherwise delete in reverse order to avoid invaliding any of the
-        // not-yet-deleted indices
-        else {
-            for (auto it = std::make_reverse_iterator(indices.end()), end = std::make_reverse_iterator(indices.begin()); it != end; ++it) {
-                for (size_t i = it->second; i > it->first; --i) {
-                    table->move_last_over(i - 1);
-                }
-            }
-        }
-    }
+    [_realm deleteObject:object];
 }
 
 - (BOOL)deleteDataForClassName:(NSString *)name {
@@ -176,9 +148,11 @@ using namespace realm;
     if (!table) {
         return false;
     }
-    _deletedObjectIndices[name].set(table->size());
-    if (![_realm.schema schemaForClassName:name]) {
-        realm::ObjectStore::delete_data_for_object(_realm.group, name.UTF8String);
+    if ([_realm.schema schemaForClassName:name]) {
+        table->clear();
+    }
+    else {
+        _realm.group.remove_table(table->get_key());
     }
 
     return true;

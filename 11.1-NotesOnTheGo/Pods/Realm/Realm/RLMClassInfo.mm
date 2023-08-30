@@ -19,36 +19,45 @@
 #import "RLMClassInfo.hpp"
 
 #import "RLMRealm_Private.hpp"
-#import "RLMObjectSchema_Private.h"
+#import "RLMObjectSchema_Private.hpp"
 #import "RLMSchema.h"
 #import "RLMProperty_Private.h"
 #import "RLMQueryUtil.hpp"
 #import "RLMUtil.hpp"
 
-#import "object_schema.hpp"
-#import "object_store.hpp"
-#import "schema.hpp"
-#import "shared_realm.hpp"
-
+#import <realm/object-store/object_schema.hpp>
+#import <realm/object-store/object_store.hpp>
+#import <realm/object-store/schema.hpp>
+#import <realm/object-store/shared_realm.hpp>
 #import <realm/table.hpp>
 
 using namespace realm;
 
-RLMClassInfo::RLMClassInfo(RLMRealm *realm, RLMObjectSchema *rlmObjectSchema,
-                             const realm::ObjectSchema *objectSchema)
+RLMClassInfo::RLMClassInfo(__unsafe_unretained RLMRealm *const realm,
+                           __unsafe_unretained RLMObjectSchema *const rlmObjectSchema,
+                           const realm::ObjectSchema *objectSchema)
 : realm(realm), rlmObjectSchema(rlmObjectSchema), objectSchema(objectSchema) { }
 
-realm::Table *RLMClassInfo::table() const {
-    if (!m_table) {
-        m_table = ObjectStore::table_for_object_type(realm.group, objectSchema->name).get();
+RLMClassInfo::RLMClassInfo(RLMRealm *realm, RLMObjectSchema *rlmObjectSchema,
+                           std::unique_ptr<realm::ObjectSchema> schema)
+: realm(realm)
+, rlmObjectSchema(rlmObjectSchema)
+, objectSchema(&*schema)
+, dynamicObjectSchema(std::move(schema))
+, dynamicRLMObjectSchema(rlmObjectSchema)
+{ }
+
+realm::TableRef RLMClassInfo::table() const {
+    if (auto key = objectSchema->table_key) {
+        return realm.group.get_table(objectSchema->table_key);
     }
-    return m_table;
+    return nullptr;
 }
 
-RLMProperty *RLMClassInfo::propertyForTableColumn(NSUInteger col) const noexcept {
+RLMProperty *RLMClassInfo::propertyForTableColumn(ColKey col) const noexcept {
     auto const& props = objectSchema->persisted_properties;
     for (size_t i = 0; i < props.size(); ++i) {
-        if (props[i].table_column == col) {
+        if (props[i].column_key == col) {
             return rlmObjectSchema.properties[i];
         }
     }
@@ -59,28 +68,92 @@ RLMProperty *RLMClassInfo::propertyForPrimaryKey() const noexcept {
     return rlmObjectSchema.primaryKeyProperty;
 }
 
-NSUInteger RLMClassInfo::tableColumn(NSString *propertyName) const {
+realm::ColKey RLMClassInfo::tableColumn(NSString *propertyName) const {
     return tableColumn(RLMValidatedProperty(rlmObjectSchema, propertyName));
 }
 
-NSUInteger RLMClassInfo::tableColumn(RLMProperty *property) const {
-    return objectSchema->persisted_properties[property.index].table_column;
+realm::ColKey RLMClassInfo::tableColumn(RLMProperty *property) const {
+    return objectSchema->persisted_properties[property.index].column_key;
+}
+
+realm::ColKey RLMClassInfo::computedTableColumn(RLMProperty *property) const {
+    // Retrieve the table key and class info for the origin property
+    // that corresponds to the target property.
+    RLMClassInfo& originInfo = realm->_info[property.objectClassName];
+    TableKey originTableKey = originInfo.objectSchema->table_key;
+
+    TableRef originTable = realm.group.get_table(originTableKey);
+    // Get the column key for origin's forward link that links to the property on the target.
+    ColKey forwardLinkKey = originInfo.tableColumn(property.linkOriginPropertyName);
+
+    // The column key opposite of the origin's forward link is the target's backlink property.
+    return originTable->get_opposite_column(forwardLinkKey);
 }
 
 RLMClassInfo &RLMClassInfo::linkTargetType(size_t propertyIndex) {
-    if (propertyIndex < m_linkTargets.size() && m_linkTargets[propertyIndex]) {
-        return *m_linkTargets[propertyIndex];
-    }
-    if (m_linkTargets.size() <= propertyIndex) {
-        m_linkTargets.resize(propertyIndex + 1);
-    }
-    m_linkTargets[propertyIndex] = &realm->_info[rlmObjectSchema.properties[propertyIndex].objectClassName];
-    return *m_linkTargets[propertyIndex];
+    return realm->_info[rlmObjectSchema.properties[propertyIndex].objectClassName];
 }
 
 RLMClassInfo &RLMClassInfo::linkTargetType(realm::Property const& property) {
     REALM_ASSERT(property.type == PropertyType::Object);
     return linkTargetType(&property - &objectSchema->persisted_properties[0]);
+}
+
+RLMClassInfo &RLMClassInfo::resolve(__unsafe_unretained RLMRealm *const realm) {
+    return realm->_info[rlmObjectSchema.className];
+}
+
+bool RLMClassInfo::isSwiftClass() const noexcept {
+    return rlmObjectSchema.isSwiftClass;
+}
+
+bool RLMClassInfo::isDynamic() const noexcept {
+    return !!dynamicObjectSchema;
+}
+
+static KeyPath keyPathFromString(RLMRealm *realm,
+                                 RLMSchema *schema,
+                                 const RLMClassInfo *info,
+                                 RLMObjectSchema *rlmObjectSchema,
+                                 NSString *keyPath) {
+    KeyPath keyPairs;
+
+    for (NSString *component in [keyPath componentsSeparatedByString:@"."]) {
+        RLMProperty *property = rlmObjectSchema[component];
+        if (!property) {
+            throw RLMException(@"Invalid property name: property '%@' not found in object of type '%@'",
+                               component, rlmObjectSchema.className);
+        }
+
+        TableKey tk = info->objectSchema->table_key;
+        ColKey ck;
+        if (property.type == RLMPropertyTypeObject) {
+            ck = info->tableColumn(property.name);
+            info = &realm->_info[property.objectClassName];
+            rlmObjectSchema = schema[property.objectClassName];
+        } else if (property.type == RLMPropertyTypeLinkingObjects) {
+            ck = info->computedTableColumn(property);
+            info = &realm->_info[property.objectClassName];
+            rlmObjectSchema = schema[property.objectClassName];
+        } else {
+            ck = info->tableColumn(property.name);
+        }
+
+        keyPairs.emplace_back(tk, ck);
+    }
+    return keyPairs;
+}
+
+std::optional<realm::KeyPathArray> RLMClassInfo::keyPathArrayFromStringArray(NSArray<NSString *> *keyPaths) const {
+    std::optional<KeyPathArray> keyPathArray;
+    if (keyPaths.count) {
+        keyPathArray.emplace();
+        for (NSString *keyPath in keyPaths) {
+            keyPathArray->push_back(keyPathFromString(realm, realm.schema, this,
+                                                      rlmObjectSchema, keyPath));
+        }
+    }
+    return keyPathArray;
 }
 
 RLMSchemaInfo::impl::iterator RLMSchemaInfo::begin() noexcept { return m_objects.begin(); }
@@ -99,6 +172,14 @@ RLMClassInfo& RLMSchemaInfo::operator[](NSString *name) {
     return *&it->second;
 }
 
+RLMClassInfo* RLMSchemaInfo::operator[](realm::TableKey key) {
+    for (auto& [name, info] : m_objects) {
+        if (info.objectSchema->table_key == key)
+            return &info;
+    }
+    return nullptr;
+}
+
 RLMSchemaInfo::RLMSchemaInfo(RLMRealm *realm) {
     RLMSchema *rlmSchema = realm.schema;
     realm::Schema const& schema = realm->_realm->schema();
@@ -107,10 +188,14 @@ RLMSchemaInfo::RLMSchemaInfo(RLMRealm *realm) {
 
     m_objects.reserve(schema.size());
     for (RLMObjectSchema *rlmObjectSchema in rlmSchema.objectSchema) {
+        auto it = schema.find(rlmObjectSchema.objectStoreName);
+        if (it == schema.end()) {
+            continue;
+        }
         m_objects.emplace(std::piecewise_construct,
                           std::forward_as_tuple(rlmObjectSchema.className),
                           std::forward_as_tuple(realm, rlmObjectSchema,
-                                                &*schema.find(rlmObjectSchema.objectName.UTF8String)));
+                                                &*it));
     }
 }
 
@@ -120,12 +205,25 @@ RLMSchemaInfo RLMSchemaInfo::clone(realm::Schema const& source_schema,
     info.m_objects.reserve(m_objects.size());
 
     auto& schema = target_realm->_realm->schema();
-    for (auto& pair : m_objects) {
-        size_t idx = pair.second.objectSchema - &*source_schema.begin();
+    REALM_ASSERT_DEBUG(schema == source_schema);
+    for (auto& [name, class_info] : m_objects) {
+        if (class_info.isDynamic()) {
+            continue;
+        }
+        size_t idx = class_info.objectSchema - &*source_schema.begin();
         info.m_objects.emplace(std::piecewise_construct,
-                               std::forward_as_tuple(pair.first),
-                               std::forward_as_tuple(target_realm, pair.second.rlmObjectSchema,
+                               std::forward_as_tuple(name),
+                               std::forward_as_tuple(target_realm, class_info.rlmObjectSchema,
                                                      &*schema.begin() + idx));
     }
     return info;
+}
+
+void RLMSchemaInfo::appendDynamicObjectSchema(std::unique_ptr<realm::ObjectSchema> schema,
+                                              RLMObjectSchema *objectSchema,
+                                              __unsafe_unretained RLMRealm *const target_realm) {
+    m_objects.emplace(std::piecewise_construct,
+                      std::forward_as_tuple(objectSchema.className),
+                      std::forward_as_tuple(target_realm, objectSchema,
+                                            std::move(schema)));
 }

@@ -16,20 +16,37 @@
 //
 ////////////////////////////////////////////////////////////////////////////
 
-#import <Foundation/Foundation.h>
-
-#import "RLMRealm.h"
+#import <Realm/RLMRealm.h>
 
 /**
  The current state of the session represented by a session object.
  */
 typedef NS_ENUM(NSUInteger, RLMSyncSessionState) {
-    /// The sync session is bound to the Realm Object Server and communicating with it.
+    /// The sync session is actively communicating or attempting to communicate
+    /// with Atlas App Services. A session is considered Active even if
+    /// it is not currently connected. Check the connection state instead if you
+    /// wish to know if the connection is currently online.
     RLMSyncSessionStateActive,
-    /// The sync session is not currently communicating with the Realm Object Server.
+    /// The sync session is not attempting to communicate with MongoDB
+    /// Realm due to the user logging out or synchronization being paused.
     RLMSyncSessionStateInactive,
     /// The sync session encountered a fatal error and is permanently invalid; it should be discarded.
     RLMSyncSessionStateInvalid
+};
+
+/**
+ The current state of a sync session's connection. Sessions which are not in
+ the Active state will always be Disconnected.
+ */
+typedef NS_ENUM(NSUInteger, RLMSyncConnectionState) {
+    /// The sync session is not connected to the server, and is not attempting
+    /// to connect, either because the session is inactive or because it is
+    /// waiting to retry after a failed connection.
+    RLMSyncConnectionStateDisconnected,
+    /// The sync session is attempting to connect to Atlas App Services.
+    RLMSyncConnectionStateConnecting,
+    /// The sync session is currently connected to Atlas App Services.
+    RLMSyncConnectionStateConnected,
 };
 
 /**
@@ -38,7 +55,7 @@ typedef NS_ENUM(NSUInteger, RLMSyncSessionState) {
  Progress notification blocks can be registered on sessions if your app wishes to be informed
  how many bytes have been uploaded or downloaded, for example to show progress indicator UIs.
  */
-typedef NS_ENUM(NSUInteger, RLMSyncProgressDirection) {
+typedef RLM_CLOSED_ENUM(NSUInteger, RLMSyncProgressDirection) {
     /// For monitoring upload progress.
     RLMSyncProgressDirectionUpload,
     /// For monitoring download progress.
@@ -71,7 +88,7 @@ typedef NS_ENUM(NSUInteger, RLMSyncProgressMode) {
     RLMSyncProgressModeForCurrentlyOutstandingWork,
 };
 
-@class RLMSyncUser, RLMSyncConfiguration, RLMSyncErrorActionToken;
+@class RLMUser, RLMSyncConfiguration, RLMSyncErrorActionToken, RLMSyncManager;
 
 /**
  The type of a progress notification block intended for reporting a session's network
@@ -82,7 +99,7 @@ typedef NS_ENUM(NSUInteger, RLMSyncProgressMode) {
  */
 typedef void(^RLMProgressNotificationBlock)(NSUInteger transferredBytes, NSUInteger transferrableBytes);
 
-NS_ASSUME_NONNULL_BEGIN
+RLM_HEADER_AUDIT_BEGIN(nullability, sendability)
 
 /**
  A token object corresponding to a progress notification block on a session object.
@@ -90,34 +107,58 @@ NS_ASSUME_NONNULL_BEGIN
  To stop notifications manually, call `-invalidate` on it. Notifications should be stopped before
  the token goes out of scope or is destroyed.
  */
+RLM_SWIFT_SENDABLE RLM_FINAL // is internally thread-safe
 @interface RLMProgressNotificationToken : RLMNotificationToken
 @end
 
 /**
- An object encapsulating a Realm Object Server "session". Sessions represent the
+ An object encapsulating an Atlas App Services "session". Sessions represent the
  communication between the client (and a local Realm file on disk), and the server
- (and a remote Realm at a given URL stored on a Realm Object Server).
+ (and a remote Realm with a given partition value stored on Atlas App Services).
 
  Sessions are always created by the SDK and vended out through various APIs. The
  lifespans of sessions associated with Realms are managed automatically. Session
  objects can be accessed from any thread.
  */
+RLM_SWIFT_SENDABLE RLM_FINAL // is internally thread-safe
 @interface RLMSyncSession : NSObject
 
 /// The session's current state.
+///
+/// This property is not KVO-compliant.
 @property (nonatomic, readonly) RLMSyncSessionState state;
 
-/// The Realm Object Server URL of the remote Realm this session corresponds to.
-@property (nullable, nonatomic, readonly) NSURL *realmURL;
+/// The session's current connection state.
+///
+/// This property is KVO-compliant and can be observed to be notified of changes.
+/// Be warned that KVO observers for this property may be called on a background
+/// thread.
+@property (atomic, readonly) RLMSyncConnectionState connectionState;
 
 /// The user that owns this session.
-- (nullable RLMSyncUser *)parentUser;
+- (nullable RLMUser *)parentUser;
 
 /**
  If the session is valid, return a sync configuration that can be used to open the Realm
  associated with this session.
  */
 - (nullable RLMSyncConfiguration *)configuration;
+
+/**
+ Temporarily suspend syncronization and disconnect from the server.
+
+ The session will not attempt to connect to Atlas App Services until `resume`
+ is called or the Realm file is closed and re-opened.
+ */
+- (void)suspend;
+
+/**
+ Resume syncronization and reconnect to Atlas App Services after suspending.
+
+ This is a no-op if the session was already active or if the session is invalid.
+ Newly created sessions begin in the Active state and do not need to be resumed.
+ */
+- (void)resume;
 
 /**
  Register a progress notification block.
@@ -159,7 +200,7 @@ NS_REFINED_FOR_SWIFT;
  
  @see `RLMSyncErrorClientResetError`, `RLMSyncErrorPermissionDeniedError`
  */
-+ (void)immediatelyHandleError:(RLMSyncErrorActionToken *)token;
++ (void)immediatelyHandleError:(RLMSyncErrorActionToken *)token syncManager:(RLMSyncManager *)syncManager;
 
 /**
  Get the sync session for the given Realm if it is a synchronized Realm, or `nil`
@@ -179,6 +220,7 @@ NS_REFINED_FOR_SWIFT;
 
  @see `RLMSyncErrorClientResetError`, `RLMSyncErrorPermissionDeniedError`
  */
+RLM_SWIFT_SENDABLE RLM_FINAL
 @interface RLMSyncErrorActionToken : NSObject
 
 /// :nodoc:
@@ -189,4 +231,4 @@ NS_REFINED_FOR_SWIFT;
 
 @end
 
-NS_ASSUME_NONNULL_END
+RLM_HEADER_AUDIT_END(nullability, sendability)

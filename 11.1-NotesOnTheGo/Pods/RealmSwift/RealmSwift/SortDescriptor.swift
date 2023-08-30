@@ -23,7 +23,7 @@ import Realm
  A `SortDescriptor` stores a key path and a sort order for use with `sorted(sortDescriptors:)`. It is similar to
  `NSSortDescriptor`, but supports only the subset of functionality which can be efficiently run by Realm's query engine.
  */
-public struct SortDescriptor {
+@frozen public struct SortDescriptor {
 
     // MARK: Properties
 
@@ -48,6 +48,17 @@ public struct SortDescriptor {
      */
     public init(keyPath: String, ascending: Bool = true) {
         self.keyPath = keyPath
+        self.ascending = ascending
+    }
+
+    /**
+     Creates a sort descriptor with the given key path and sort order values.
+
+     - parameter keyPath:   The key path which the sort descriptor orders results by.
+     - parameter ascending: Whether the descriptor sorts in ascending or descending order.
+     */
+    public init<Element: ObjectBase>(keyPath: PartialKeyPath<Element>, ascending: Bool = true) {
+        self.keyPath = _name(for: keyPath)
         self.ascending = ascending
     }
 
@@ -87,24 +98,6 @@ extension SortDescriptor: ExpressibleByStringLiteral {
     public typealias ExtendedGraphemeClusterLiteralType = StringLiteralType
 
     /**
-     Creates a `SortDescriptor` out of a Unicode scalar literal.
-
-     - parameter unicodeScalarLiteral: Property name literal.
-    */
-    public init(unicodeScalarLiteral value: UnicodeScalarLiteralType) {
-        self.init(keyPath: value)
-    }
-
-    /**
-     Creates a `SortDescriptor` out of a character literal.
-
-     - parameter extendedGraphemeClusterLiteral: Property name literal.
-     */
-    public init(extendedGraphemeClusterLiteral value: ExtendedGraphemeClusterLiteralType) {
-        self.init(keyPath: value)
-    }
-
-    /**
      Creates a `SortDescriptor` out of a string literal.
 
      - parameter stringLiteral: Property name literal.
@@ -112,14 +105,4 @@ extension SortDescriptor: ExpressibleByStringLiteral {
     public init(stringLiteral value: StringLiteralType) {
         self.init(keyPath: value)
     }
-}
-
-// MARK: Unavailable
-
-extension SortDescriptor {
-    @available(*, unavailable, renamed: "init(keyPath:ascending:)")
-    public init(property: String, ascending: Bool = true) { fatalError() }
-
-    @available(*, unavailable, renamed: "keyPath")
-    public var property: String { fatalError() }
 }

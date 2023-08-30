@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 50;
+	objectVersion = 53;
 	objects = {
 
 /* Begin PBXBuildFile section */
@@ -14,7 +14,7 @@
 		015037D1213D8F000028713F /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 015037D0213D8F000028713F /* Assets.xcassets */; };
 		015037D4213D8F000028713F /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 015037D2213D8F000028713F /* LaunchScreen.storyboard */; };
 		015037DC213DA1780028713F /* ThirdViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 015037DB213DA1780028713F /* ThirdViewController.swift */; };
-		CF1B1C23CB57ED51182C1A71 /* Pods_12_Layouts.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A98B3A8EF32DDD02CBFDD30D /* Pods_12_Layouts.framework */; };
+		75E4F8B2A35E1991FD38BA74 /* Pods_12_Layouts.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2C118133C3056FE9747B48B8 /* Pods_12_Layouts.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -27,9 +27,9 @@
 		015037D3213D8F000028713F /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		015037D5213D8F000028713F /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		015037DB213DA1780028713F /* ThirdViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThirdViewController.swift; sourceTree = "<group>"; };
-		11391BADE663BC3D03F6C093 /* Pods-12-Layouts.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-12-Layouts.debug.xcconfig"; path = "Pods/Target Support Files/Pods-12-Layouts/Pods-12-Layouts.debug.xcconfig"; sourceTree = "<group>"; };
-		3EEFCB43EF4E9C702FAA0858 /* Pods-12-Layouts.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-12-Layouts.release.xcconfig"; path = "Pods/Target Support Files/Pods-12-Layouts/Pods-12-Layouts.release.xcconfig"; sourceTree = "<group>"; };
-		A98B3A8EF32DDD02CBFDD30D /* Pods_12_Layouts.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_12_Layouts.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		2C118133C3056FE9747B48B8 /* Pods_12_Layouts.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_12_Layouts.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		399734468D7A836DB54DABD2 /* Pods-12-Layouts.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-12-Layouts.debug.xcconfig"; path = "Target Support Files/Pods-12-Layouts/Pods-12-Layouts.debug.xcconfig"; sourceTree = "<group>"; };
+		BD021C6C92689D3F00C76389 /* Pods-12-Layouts.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-12-Layouts.release.xcconfig"; path = "Target Support Files/Pods-12-Layouts/Pods-12-Layouts.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -37,7 +37,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				CF1B1C23CB57ED51182C1A71 /* Pods_12_Layouts.framework in Frameworks */,
+				75E4F8B2A35E1991FD38BA74 /* Pods_12_Layouts.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -49,8 +49,8 @@
 			children = (
 				015037C6213D8EFE0028713F /* 12-Layouts */,
 				015037C5213D8EFE0028713F /* Products */,
-				ADBF25BDCE402939CC98277B /* Pods */,
-				5EBFBCB88BC468CC5EBFD5C1 /* Frameworks */,
+				9AB2F2BD4EAF432AE27DD624 /* Pods */,
+				6122C443F118C1F41E83BC2B /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -77,21 +77,21 @@
 			path = "12-Layouts";
 			sourceTree = "<group>";
 		};
-		5EBFBCB88BC468CC5EBFD5C1 /* Frameworks */ = {
+		6122C443F118C1F41E83BC2B /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				A98B3A8EF32DDD02CBFDD30D /* Pods_12_Layouts.framework */,
+				2C118133C3056FE9747B48B8 /* Pods_12_Layouts.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
-		ADBF25BDCE402939CC98277B /* Pods */ = {
+		9AB2F2BD4EAF432AE27DD624 /* Pods */ = {
 			isa = PBXGroup;
 			children = (
-				11391BADE663BC3D03F6C093 /* Pods-12-Layouts.debug.xcconfig */,
-				3EEFCB43EF4E9C702FAA0858 /* Pods-12-Layouts.release.xcconfig */,
+				399734468D7A836DB54DABD2 /* Pods-12-Layouts.debug.xcconfig */,
+				BD021C6C92689D3F00C76389 /* Pods-12-Layouts.release.xcconfig */,
 			);
-			name = Pods;
+			path = Pods;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -101,11 +101,11 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 015037D8213D8F000028713F /* Build configuration list for PBXNativeTarget "12-Layouts" */;
 			buildPhases = (
-				E6A0C13B27F64210AD6F18F4 /* [CP] Check Pods Manifest.lock */,
+				12C2D27775E1BEB65DFF9E03 /* [CP] Check Pods Manifest.lock */,
 				015037C0213D8EFE0028713F /* Sources */,
 				015037C1213D8EFE0028713F /* Frameworks */,
 				015037C2213D8EFE0028713F /* Resources */,
-				6FCF0A9CC335C0C32F99361C /* [CP] Embed Pods Frameworks */,
+				E49B264AE402DCC8B191D610 /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -122,12 +122,14 @@
 		015037BC213D8EFE0028713F /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
+				BuildIndependentTargetsInParallel = YES;
 				LastSwiftUpdateCheck = 1000;
-				LastUpgradeCheck = 1000;
+				LastUpgradeCheck = 1430;
 				ORGANIZATIONNAME = Frogames;
 				TargetAttributes = {
 					015037C3213D8EFE0028713F = {
 						CreatedOnToolsVersion = 10.0;
+						LastSwiftMigration = "";
 					};
 				};
 			};
@@ -163,7 +165,29 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
-		6FCF0A9CC335C0C32F99361C /* [CP] Embed Pods Frameworks */ = {
+		12C2D27775E1BEB65DFF9E03 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-12-Layouts-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		E49B264AE402DCC8B191D610 /* [CP] Embed Pods Frameworks */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -178,24 +202,6 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-12-Layouts/Pods-12-Layouts-frameworks.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
-		E6A0C13B27F64210AD6F18F4 /* [CP] Check Pods Manifest.lock */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
-				"${PODS_ROOT}/Manifest.lock",
-			);
-			name = "[CP] Check Pods Manifest.lock";
-			outputPaths = (
-				"$(DERIVED_FILE_DIR)/Pods-12-Layouts-checkManifestLockResult.txt",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
 			showEnvVarsInLog = 0;
 		};
 /* End PBXShellScriptBuildPhase section */
@@ -260,6 +266,7 @@
 				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
 				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
 				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
 				CLANG_WARN_STRICT_PROTOTYPES = YES;
 				CLANG_WARN_SUSPICIOUS_MOVE = YES;
@@ -285,7 +292,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.4;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
 				ONLY_ACTIVE_ARCH = YES;
@@ -321,6 +328,7 @@
 				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
 				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
 				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
 				CLANG_WARN_STRICT_PROTOTYPES = YES;
 				CLANG_WARN_SUSPICIOUS_MOVE = YES;
@@ -340,7 +348,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.4;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
 				SDKROOT = iphoneos;
@@ -352,7 +360,7 @@
 		};
 		015037D9213D8F000028713F /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 11391BADE663BC3D03F6C093 /* Pods-12-Layouts.debug.xcconfig */;
+			baseConfigurationReference = 399734468D7A836DB54DABD2 /* Pods-12-Layouts.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
@@ -364,14 +372,14 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.frogames.layouts;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_VERSION = 4.2;
+				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Debug;
 		};
 		015037DA213D8F000028713F /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 3EEFCB43EF4E9C702FAA0858 /* Pods-12-Layouts.release.xcconfig */;
+			baseConfigurationReference = BD021C6C92689D3F00C76389 /* Pods-12-Layouts.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
@@ -383,7 +391,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.frogames.layouts;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_VERSION = 4.2;
+				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Release;

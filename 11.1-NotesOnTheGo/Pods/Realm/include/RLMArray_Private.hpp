@@ -22,7 +22,6 @@
 
 #import "RLMResults_Private.hpp"
 
-#import <realm/link_view_fwd.hpp>
 #import <realm/table_ref.hpp>
 
 namespace realm {
@@ -45,12 +44,13 @@ class RLMObservationInfo;
 }
 @end
 
-@interface RLMManagedArray : RLMArray <RLMFastEnumerable>
-- (instancetype)initWithParent:(RLMObjectBase *)parentObject property:(RLMProperty *)property;
-- (RLMManagedArray *)initWithList:(realm::List)list
-                            realm:(__unsafe_unretained RLMRealm *const)realm
-                       parentInfo:(RLMClassInfo *)parentInfo
-                         property:(__unsafe_unretained RLMProperty *const)property;
+@interface RLMManagedArray () <RLMCollectionPrivate>
+- (RLMManagedArray *)initWithBackingCollection:(realm::List)list
+                                    parentInfo:(RLMClassInfo *)parentInfo
+                                      property:(RLMProperty *)property;
+- (RLMManagedArray *)initWithParent:(realm::Obj)parent
+                           property:(RLMProperty *)property
+                         parentInfo:(RLMClassInfo&)info;
 
 - (bool)isBackedByList:(realm::List const&)list;
 
@@ -63,11 +63,3 @@ void RLMValidateArrayObservationKey(NSString *keyPath, RLMArray *array);
 // Initialize the observation info for an array if needed
 void RLMEnsureArrayObservationInfo(std::unique_ptr<RLMObservationInfo>& info,
                                    NSString *keyPath, RLMArray *array, id observed);
-
-
-//
-// RLMResults private methods
-//
-@interface RLMResults () <RLMFastEnumerable>
-- (void)deleteObjectsFromRealm;
-@end

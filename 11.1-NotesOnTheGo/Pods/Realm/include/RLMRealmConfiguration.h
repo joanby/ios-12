@@ -16,10 +16,11 @@
 //
 ////////////////////////////////////////////////////////////////////////////
 
-#import <Foundation/Foundation.h>
 #import <Realm/RLMRealm.h>
 
-NS_ASSUME_NONNULL_BEGIN
+@class RLMEventConfiguration, RLMSyncConfiguration;
+
+RLM_HEADER_AUDIT_BEGIN(nullability, sendability)
 
 /**
  A block called when opening a Realm for the first time during the life
@@ -30,7 +31,15 @@ NS_ASSUME_NONNULL_BEGIN
  Return `YES` to indicate that an attempt to compact the file should be made.
  The compaction will be skipped if another process is accessing it.
  */
+RLM_SWIFT_SENDABLE
 typedef BOOL (^RLMShouldCompactOnLaunchBlock)(NSUInteger totalBytes, NSUInteger bytesUsed);
+
+/**
+ A block which receives a subscription set instance, that can be used to add an initial set of subscriptions which will be executed
+ when the Realm is first opened.
+ */
+RLM_SWIFT_SENDABLE
+typedef void(^RLMFlexibleSyncInitialSubscriptionsBlock)(RLMSyncSubscriptionSet * _Nonnull subscriptions);
 
 /**
  An `RLMRealmConfiguration` instance describes the different options used to
@@ -66,11 +75,12 @@ typedef BOOL (^RLMShouldCompactOnLaunchBlock)(NSUInteger totalBytes, NSUInteger 
 
 #pragma mark - Properties
 
-/// The local URL of the Realm file. Mutually exclusive with `inMemoryIdentifier` and `syncConfiguration`;
-/// setting any one of the three properties will automatically nil out the other two.
+/// The local URL of the Realm file. Mutually exclusive with `inMemoryIdentifier`;
+/// setting one of the two properties will automatically nil out the other.
 @property (nonatomic, copy, nullable) NSURL *fileURL;
 
-/// A string used to identify a particular in-memory Realm. Mutually exclusive with `fileURL` and `syncConfiguration`;
+/// A string used to identify a particular in-memory Realm. Mutually exclusive with `fileURL`,
+/// `seedFilePath`and `syncConfiguration`;
 /// setting any one of the three properties will automatically nil out the other two.
 @property (nonatomic, copy, nullable) NSString *inMemoryIdentifier;
 
@@ -79,13 +89,23 @@ typedef BOOL (^RLMShouldCompactOnLaunchBlock)(NSUInteger totalBytes, NSUInteger 
 
 /// Whether to open the Realm in read-only mode.
 ///
-/// This is required to be able to open Realm files which are not writeable or
-/// are in a directory which is not writeable. This should only be used on files
-/// which will not be modified by anyone while they are open, and not just to
-/// get a read-only view of a file which may be written to by another thread or
-/// process. Opening in read-only mode requires disabling Realm's reader/writer
-/// coordination, so committing a write transaction from another process will
-/// result in crashes.
+/// For non-synchronized Realms, this is required to be able to open Realm
+/// files which are not writeable or are in a directory which is not writeable.
+/// This should only be used on files which will not be modified by anyone
+/// while they are open, and not just to get a read-only view of a file which
+/// may be written to by another thread or process. Opening in read-only mode
+/// requires disabling Realm's reader/writer coordination, so committing a
+/// write transaction from another process will result in crashes.
+///
+/// Syncronized Realms must always be writeable (as otherwise no
+/// synchronization could happen), and this instead merely disallows performing
+/// write transactions on the Realm. In addition, it will skip some automatic
+/// writes made to the Realm, such as to initialize the Realm's schema. Setting
+/// `readOnly = YES` is not strictly required for Realms which the sync user
+/// does not have write access to, but is highly recommended as it will improve
+/// error reporting and catch some errors earlier.
+///
+/// Realms using query-based sync cannot be opened in read-only mode.
 @property (nonatomic) BOOL readOnly;
 
 /// The current schema version.
@@ -118,6 +138,60 @@ typedef BOOL (^RLMShouldCompactOnLaunchBlock)(NSUInteger totalBytes, NSUInteger 
 /// The classes managed by the Realm.
 @property (nonatomic, copy, nullable) NSArray *objectClasses;
 
+/**
+ The maximum number of live versions in the Realm file before an exception will
+ be thrown when attempting to start a write transaction.
+
+ Realm provides MVCC snapshot isolation, meaning that writes on one thread do
+ not overwrite data being read on another thread, and instead write a new copy
+ of that data. When a Realm refreshes it updates to the latest version of the
+ data and releases the old versions, allowing them to be overwritten by
+ subsequent write transactions.
+
+ Under normal circumstances this is not a problem, but if the number of active
+ versions grow too large, it will have a negative effect on the filesize on
+ disk. This can happen when performing writes on many different threads at
+ once, when holding on to frozen objects for an extended time, or when
+ performing long operations on background threads which do not allow the Realm
+ to refresh.
+
+ Setting this property to a non-zero value makes it so that exceeding the set
+ number of versions will instead throw an exception. This can be used with a
+ low value during development to help identify places that may be problematic,
+ or in production use to cause the app to crash rather than produce a Realm
+ file which is too large to be opened.
+
+ */
+@property (nonatomic) NSUInteger maximumNumberOfActiveVersions;
+
+/**
+ When opening the Realm for the first time, instead of creating an empty file,
+ the Realm file will be copied from the provided seed file path and used instead.
+ This can be used to open a Realm file with pre-populated data.
+
+ If a realm file already exists at the configuration's destination path, the seed file
+ will not be copied and the already existing realm will be opened instead.
+
+ Note that to use this parameter with a synced Realm configuration
+ the seed Realm must be appropriately copied to a destination with
+ `[RLMRealm writeCopyForConfiguration:]` first.
+
+ This option is mutually exclusive with `inMemoryIdentifier`. Setting a `seedFilePath`
+ will nil out the `inMemoryIdentifier`.
+ */
+@property (nonatomic, copy, nullable) NSURL *seedFilePath;
+
+/**
+ A configuration object representing configuration state for Realms intended
+ to sync with Atlas Device Sync.
+
+ This property is mutually exclusive with both `inMemoryIdentifier` and `fileURL`;
+ setting any one of the three properties will automatically nil out the other two.
+
+ @see `RLMSyncConfiguration`
+ */
+@property (nullable, nonatomic) RLMSyncConfiguration *syncConfiguration;
+
 @end
 
-NS_ASSUME_NONNULL_END
+RLM_HEADER_AUDIT_END(nullability, sendability)

@@ -19,7 +19,7 @@ extension UITableView {
 
 extension UICollectionView {
     var swipeCells: [SwipeCollectionViewCell] {
-        return visibleCells as? [SwipeCollectionViewCell] ?? []
+        return visibleCells.compactMap({ $0 as? SwipeCollectionViewCell })
     }
     
     func hideSwipeCell() {
@@ -79,11 +79,3 @@ extension UIPanGestureRecognizer {
         return CGPoint(x: x, y: y)
     }
 }
-
-#if swift(>=4.2)
-import UIKit.UIGeometry
-
-extension UIEdgeInsets {
-    public static let zero = UIEdgeInsets()
-}
-#endif

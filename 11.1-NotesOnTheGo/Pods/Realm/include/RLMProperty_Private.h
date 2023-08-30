@@ -22,7 +22,7 @@
 
 @class RLMObjectBase;
 
-NS_ASSUME_NONNULL_BEGIN
+RLM_HEADER_AUDIT_BEGIN(nullability)
 
 BOOL RLMPropertyTypeIsComputed(RLMPropertyType propertyType);
 FOUNDATION_EXTERN void RLMValidateSwiftPropertyName(NSString *name);
@@ -45,11 +45,17 @@ static inline NSString *RLMTypeToString(RLMPropertyType type) {
         case RLMPropertyTypeFloat:
             return @"float";
         case RLMPropertyTypeAny:
-            return @"any";
+            return @"mixed";
         case RLMPropertyTypeObject:
             return @"object";
         case RLMPropertyTypeLinkingObjects:
             return @"linking objects";
+        case RLMPropertyTypeDecimal128:
+            return @"decimal128";
+        case RLMPropertyTypeObjectId:
+            return @"object id";
+        case RLMPropertyTypeUUID:
+            return @"uuid";
     }
     return @"Unknown";
 }
@@ -58,7 +64,6 @@ static inline NSString *RLMTypeToString(RLMPropertyType type) {
 @interface RLMProperty () {
 @public
     RLMPropertyType _type;
-    Ivar _swiftIvar;
 }
 
 - (instancetype)initWithName:(NSString *)name
@@ -72,39 +77,37 @@ static inline NSString *RLMTypeToString(RLMPropertyType type) {
                                  property:(objc_property_t)property
                                  instance:(RLMObjectBase *)objectInstance;
 
-- (instancetype)initSwiftListPropertyWithName:(NSString *)name
-                                     instance:(id)object;
-
-- (instancetype)initSwiftOptionalPropertyWithName:(NSString *)name
-                                          indexed:(BOOL)indexed
-                                             ivar:(Ivar)ivar
-                                     propertyType:(RLMPropertyType)propertyType;
-
-- (instancetype)initSwiftLinkingObjectsPropertyWithName:(NSString *)name
-                                                   ivar:(Ivar)ivar
-                                        objectClassName:(nullable NSString *)objectClassName
-                                 linkOriginPropertyName:(nullable NSString *)linkOriginPropertyName;
+- (void)updateAccessors;
 
 // private setters
 @property (nonatomic, readwrite) NSString *name;
 @property (nonatomic, readwrite, assign) RLMPropertyType type;
 @property (nonatomic, readwrite) BOOL indexed;
 @property (nonatomic, readwrite) BOOL optional;
+@property (nonatomic, readwrite) BOOL array;
+@property (nonatomic, readwrite) BOOL set;
+@property (nonatomic, readwrite) BOOL dictionary;
 @property (nonatomic, copy, nullable) NSString *objectClassName;
+@property (nonatomic, copy, nullable) NSString *linkOriginPropertyName;
 
 // private properties
-@property (nonatomic, readwrite) NSString *columnName;
+@property (nonatomic, readwrite, nullable) NSString *columnName;
 @property (nonatomic, assign) NSUInteger index;
 @property (nonatomic, assign) BOOL isPrimary;
-@property (nonatomic, assign) Ivar swiftIvar;
+@property (nonatomic, assign) BOOL isLegacy;
+@property (nonatomic, assign) ptrdiff_t swiftIvar;
+@property (nonatomic, assign, nullable) Class swiftAccessor;
+@property (nonatomic, readwrite, assign) RLMPropertyType dictionaryKeyType;
+@property (nonatomic, readwrite) BOOL customMappingIsOptional;
 
 // getter and setter names
 @property (nonatomic, copy) NSString *getterName;
 @property (nonatomic, copy) NSString *setterName;
-@property (nonatomic) SEL getterSel;
-@property (nonatomic) SEL setterSel;
+@property (nonatomic, nullable) SEL getterSel;
+@property (nonatomic, nullable) SEL setterSel;
 
 - (RLMProperty *)copyWithNewName:(NSString *)name;
+- (NSString *)typeName;
 
 @end
 
@@ -112,7 +115,7 @@ static inline NSString *RLMTypeToString(RLMPropertyType type) {
 /**
  This method is useful only in specialized circumstances, for example, in conjunction with
  +[RLMObjectSchema initWithClassName:objectClass:properties:]. If you are simply building an
- app on Realm, it is not recommened to use this method.
+ app on Realm, it is not recommended to use this method.
 
  Initialize an RLMProperty
 
@@ -133,4 +136,4 @@ static inline NSString *RLMTypeToString(RLMPropertyType type) {
                     optional:(BOOL)optional;
 @end
 
-NS_ASSUME_NONNULL_END
+RLM_HEADER_AUDIT_END(nullability)

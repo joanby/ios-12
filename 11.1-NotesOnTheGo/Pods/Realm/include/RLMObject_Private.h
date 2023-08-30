@@ -18,10 +18,20 @@
 
 #import <Realm/RLMObjectBase_Dynamic.h>
 
-NS_ASSUME_NONNULL_BEGIN
+#import <Realm/RLMRealm.h>
 
-@class RLMProperty, RLMArray, RLMSwiftPropertyMetadata;
+RLM_HEADER_AUDIT_BEGIN(nullability, sendability)
+
+@class RLMProperty, RLMArray, RLMSchema;
 typedef NS_ENUM(int32_t, RLMPropertyType);
+
+FOUNDATION_EXTERN void RLMInitializeWithValue(RLMObjectBase *, id, RLMSchema *);
+
+typedef void (^RLMObjectNotificationCallback)(RLMObjectBase *_Nullable object,
+                                              NSArray<NSString *> *_Nullable propertyNames,
+                                              NSArray *_Nullable oldValues,
+                                              NSArray *_Nullable newValues,
+                                              NSError *_Nullable error);
 
 // RLMObject accessor and read/write realm
 @interface RLMObjectBase () {
@@ -30,45 +40,17 @@ typedef NS_ENUM(int32_t, RLMPropertyType);
     __unsafe_unretained RLMObjectSchema *_objectSchema;
 }
 
-// unmanaged initializer
-- (instancetype)initWithValue:(id)value schema:(RLMSchema *)schema NS_DESIGNATED_INITIALIZER;
-
-// live accessor initializer
-- (instancetype)initWithRealm:(__unsafe_unretained RLMRealm *const)realm
-                       schema:(RLMObjectSchema *)schema NS_DESIGNATED_INITIALIZER;
-
 // shared schema for this class
 + (nullable RLMObjectSchema *)sharedSchema;
 
-// provide injection point for alternative Swift object util class
-+ (Class)objectUtilClass:(BOOL)isSwift;
++ (nullable NSArray<RLMProperty *> *)_getProperties;
++ (bool)_realmIgnoreClass;
 
-@end
-
-@interface RLMObject ()
-
-// unmanaged initializer
-- (instancetype)initWithValue:(id)value schema:(RLMSchema *)schema NS_DESIGNATED_INITIALIZER;
-
-// live accessor initializer
-- (instancetype)initWithRealm:(__unsafe_unretained RLMRealm *const)realm
-                       schema:(RLMObjectSchema *)schema NS_DESIGNATED_INITIALIZER;
-
+// This enables to override the propertiesMapping in Swift, it is not to be used in Objective-C API.
++ (NSDictionary<NSString *, NSString *> *)propertiesMapping;
 @end
 
 @interface RLMDynamicObject : RLMObject
-
-@end
-
-// A reference to an object's row that doesn't keep the object accessor alive.
-// Used by some Swift property types, such as LinkingObjects, to avoid retain cycles
-// with their containing object.
-@interface RLMWeakObjectHandle : NSObject<NSCopying>
-
-- (instancetype)initWithObject:(RLMObjectBase *)object;
-
-// Consumes the row, so can only usefully be called once.
-@property (nonatomic, readonly) RLMObjectBase *object;
 
 @end
 
@@ -78,11 +60,15 @@ FOUNDATION_EXTERN id _Nullable RLMValidatedValueForProperty(id object, NSString 
 // Compare two RLObjectBases
 FOUNDATION_EXTERN BOOL RLMObjectBaseAreEqual(RLMObjectBase * _Nullable o1, RLMObjectBase * _Nullable o2);
 
-typedef void (^RLMObjectNotificationCallback)(NSArray<NSString *> *_Nullable propertyNames,
-                                              NSArray *_Nullable oldValues,
-                                              NSArray *_Nullable newValues,
-                                              NSError *_Nullable error);
-FOUNDATION_EXTERN RLMNotificationToken *RLMObjectAddNotificationBlock(RLMObjectBase *obj, RLMObjectNotificationCallback block);
+FOUNDATION_EXTERN RLMNotificationToken *RLMObjectBaseAddNotificationBlock(RLMObjectBase *obj,
+                                                                          NSArray<NSString *> *_Nullable keyPaths,
+                                                                          dispatch_queue_t _Nullable queue,
+                                                                          RLMObjectNotificationCallback block);
+
+RLMNotificationToken *RLMObjectAddNotificationBlock(RLMObjectBase *obj,
+                                                    RLMObjectChangeBlock block,
+                                                    NSArray<NSString *> *_Nullable keyPaths,
+                                                    dispatch_queue_t _Nullable queue);
 
 // Returns whether the class is a descendent of RLMObjectBase
 FOUNDATION_EXTERN BOOL RLMIsObjectOrSubclass(Class klass);
@@ -90,58 +76,35 @@ FOUNDATION_EXTERN BOOL RLMIsObjectOrSubclass(Class klass);
 // Returns whether the class is an indirect descendant of RLMObjectBase
 FOUNDATION_EXTERN BOOL RLMIsObjectSubclass(Class klass);
 
-// For unit testing purposes, allow an Objective-C class named FakeObject to also be used
-// as the base class of managed objects. This allows for testing invalid schemas.
-FOUNDATION_EXTERN void RLMSetTreatFakeObjectAsRLMObject(BOOL flag);
-
-// Get ObjectUil class for objc or swift
-FOUNDATION_EXTERN Class RLMObjectUtilClass(BOOL isSwift);
-
 FOUNDATION_EXTERN const NSUInteger RLMDescriptionMaxDepth;
 
-@interface RLMObjectUtil : NSObject
+FOUNDATION_EXTERN id RLMObjectFreeze(RLMObjectBase *obj) NS_RETURNS_RETAINED;
 
-+ (nullable NSArray<NSString *> *)ignoredPropertiesForClass:(Class)cls;
-+ (nullable NSArray<NSString *> *)indexedPropertiesForClass:(Class)cls;
-+ (nullable NSDictionary<NSString *, NSDictionary<NSString *, NSString *> *> *)linkingObjectsPropertiesForClass:(Class)cls;
+FOUNDATION_EXTERN id RLMObjectThaw(RLMObjectBase *obj);
 
-// Precondition: these must be returned in ascending order.
-+ (nullable NSArray<RLMSwiftPropertyMetadata *> *)getSwiftProperties:(id)obj;
+// Gets an object identifier suitable for use with Combine. This value may
+// change when an unmanaged object is added to the Realm.
+FOUNDATION_EXTERN uint64_t RLMObjectBaseGetCombineId(RLMObjectBase *);
 
-+ (nullable NSDictionary<NSString *, NSNumber *> *)getOptionalProperties:(id)obj;
-+ (nullable NSArray<NSString *> *)requiredPropertiesForClass:(Class)cls;
-
+// An accessor object which is used to interact with Swift properties from obj-c
+@interface RLMManagedPropertyAccessor : NSObject
+// Perform any initialization required for KVO on a *unmanaged* object
++ (void)observe:(RLMProperty *)property on:(RLMObjectBase *)parent;
+// Initialize the given property on a *managed* object which previous was unmanaged
++ (void)promote:(RLMProperty *)property on:(RLMObjectBase *)parent;
+// Initialize the given property on a newly created *managed* object
++ (void)initialize:(RLMProperty *)property on:(RLMObjectBase *)parent;
+// Read the value of the property, on either kind of object
++ (id)get:(RLMProperty *)property on:(RLMObjectBase *)parent;
+// Set the property to the given value, on either kind of object
++ (void)set:(RLMProperty *)property on:(RLMObjectBase *)parent to:(id)value;
 @end
 
-typedef NS_ENUM(NSUInteger, RLMSwiftPropertyKind) {
-    RLMSwiftPropertyKindList,
-    RLMSwiftPropertyKindLinkingObjects,
-    RLMSwiftPropertyKindOptional,
-    RLMSwiftPropertyKindNilLiteralOptional,   // For Swift optional properties that reflect as nil
-    RLMSwiftPropertyKindOther,
-};
-
-// Metadata that describes a Swift generic property.
-@interface RLMSwiftPropertyMetadata : NSObject
-
-@property (nonatomic, strong) NSString *propertyName;
-@property (nullable, nonatomic, strong) NSString *className;
-@property (nullable, nonatomic, strong) NSString *linkedPropertyName;
-@property (nonatomic) RLMPropertyType propertyType;
-@property (nonatomic) RLMSwiftPropertyKind kind;
-
-+ (instancetype)metadataForOtherProperty:(NSString *)propertyName;
-
-+ (instancetype)metadataForListProperty:(NSString *)propertyName;
-
-+ (instancetype)metadataForLinkingObjectsProperty:(NSString *)propertyName
-                                        className:(NSString *)className
-                               linkedPropertyName:(NSString *)linkedPropertyName;
-
-+ (instancetype)metadataForOptionalProperty:(NSString *)propertyName type:(RLMPropertyType)type;
-
-+ (instancetype)metadataForNilLiteralOptionalProperty:(NSString *)propertyName;
-
+@interface RLMObjectNotificationToken : RLMNotificationToken
+- (void)observe:(RLMObjectBase *)obj
+       keyPaths:(nullable NSArray<NSString *> *)keyPaths
+          block:(RLMObjectNotificationCallback)block;
+- (void)registrationComplete:(void (^)(void))completion;
 @end
 
-NS_ASSUME_NONNULL_END
+RLM_HEADER_AUDIT_END(nullability, sendability)

@@ -17,28 +17,29 @@
 ////////////////////////////////////////////////////////////////////////////
 
 #import "RLMThreadSafeReference.h"
-#import "thread_safe_reference.hpp"
 
-NS_ASSUME_NONNULL_BEGIN
+#import <realm/object-store/thread_safe_reference.hpp>
 
+RLM_HEADER_AUDIT_BEGIN(nullability, sendability)
+
+RLM_HIDDEN
 @protocol RLMThreadConfined_Private <NSObject>
 
 // Constructs a new `ThreadSafeReference`
-- (std::unique_ptr<realm::ThreadSafeReferenceBase>)makeThreadSafeReference;
+- (realm::ThreadSafeReference)makeThreadSafeReference;
 
 // The extra information needed to construct an instance of this type from the Object Store type
 @property (nonatomic, readonly, nullable) id objectiveCMetadata;
 
 // Constructs an new instance of this type
-+ (nullable instancetype)objectWithThreadSafeReference:(std::unique_ptr<realm::ThreadSafeReferenceBase>)reference
++ (nullable instancetype)objectWithThreadSafeReference:(realm::ThreadSafeReference)reference
                                               metadata:(nullable id)metadata
                                                  realm:(RLMRealm *)realm;
 @end
 
+RLM_DIRECT_MEMBERS
 @interface RLMThreadSafeReference ()
-
 - (nullable id<RLMThreadConfined>)resolveReferenceInRealm:(RLMRealm *)realm;
-
 @end
 
-NS_ASSUME_NONNULL_END
+RLM_HEADER_AUDIT_END(nullability, sendability)

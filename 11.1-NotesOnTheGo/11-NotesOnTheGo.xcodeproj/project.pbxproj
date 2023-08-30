@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 51;
+	objectVersion = 53;
 	objects = {
 
 /* Begin PBXBuildFile section */
@@ -18,7 +18,7 @@
 		01D9CACA212478820034A3BF /* Note.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01D9CAC9212478820034A3BF /* Note.swift */; };
 		01DD906E212326F100D3C9B7 /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01DD906D212326F100D3C9B7 /* Extensions.swift */; };
 		01DD907021232B8D00D3C9B7 /* Category.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01DD906F21232B8D00D3C9B7 /* Category.swift */; };
-		1637B670C1D8032BA9247DB4 /* Pods_11_NotesOnTheGo.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AF0AC5C0288B989A3ADC758D /* Pods_11_NotesOnTheGo.framework */; };
+		46DCC1DE19B80C4A05D2C0E7 /* Pods_11_NotesOnTheGo.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DCFC75939385A9E3C94A6CF6 /* Pods_11_NotesOnTheGo.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -35,9 +35,9 @@
 		01D9CAC9212478820034A3BF /* Note.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Note.swift; sourceTree = "<group>"; };
 		01DD906D212326F100D3C9B7 /* Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
 		01DD906F21232B8D00D3C9B7 /* Category.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Category.swift; sourceTree = "<group>"; };
-		1F188FA668D262748E33648C /* Pods-11-NotesOnTheGo.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-11-NotesOnTheGo.release.xcconfig"; path = "Pods/Target Support Files/Pods-11-NotesOnTheGo/Pods-11-NotesOnTheGo.release.xcconfig"; sourceTree = "<group>"; };
-		AF0AC5C0288B989A3ADC758D /* Pods_11_NotesOnTheGo.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_11_NotesOnTheGo.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		BED5F1E99E463403076A287F /* Pods-11-NotesOnTheGo.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-11-NotesOnTheGo.debug.xcconfig"; path = "Pods/Target Support Files/Pods-11-NotesOnTheGo/Pods-11-NotesOnTheGo.debug.xcconfig"; sourceTree = "<group>"; };
+		0D53764D862EBDEDCCB96322 /* Pods-11-NotesOnTheGo.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-11-NotesOnTheGo.debug.xcconfig"; path = "Target Support Files/Pods-11-NotesOnTheGo/Pods-11-NotesOnTheGo.debug.xcconfig"; sourceTree = "<group>"; };
+		0D8DD4B6B7F43361551F9045 /* Pods-11-NotesOnTheGo.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-11-NotesOnTheGo.release.xcconfig"; path = "Target Support Files/Pods-11-NotesOnTheGo/Pods-11-NotesOnTheGo.release.xcconfig"; sourceTree = "<group>"; };
+		DCFC75939385A9E3C94A6CF6 /* Pods_11_NotesOnTheGo.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_11_NotesOnTheGo.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -45,7 +45,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				1637B670C1D8032BA9247DB4 /* Pods_11_NotesOnTheGo.framework in Frameworks */,
+				46DCC1DE19B80C4A05D2C0E7 /* Pods_11_NotesOnTheGo.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -57,8 +57,8 @@
 			children = (
 				010360CA211C9364008B1BD6 /* 11-NotesOnTheGo */,
 				010360C9211C9364008B1BD6 /* Products */,
-				82C9BAB28267A8F63CF4E5F1 /* Pods */,
-				B9058ADE0302CB025415BC83 /* Frameworks */,
+				927EFF9884D1EF14F60FFBBB /* Pods */,
+				9E543B191476D730B87652A7 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -121,19 +121,19 @@
 			path = "Supporting Files";
 			sourceTree = "<group>";
 		};
-		82C9BAB28267A8F63CF4E5F1 /* Pods */ = {
+		927EFF9884D1EF14F60FFBBB /* Pods */ = {
 			isa = PBXGroup;
 			children = (
-				BED5F1E99E463403076A287F /* Pods-11-NotesOnTheGo.debug.xcconfig */,
-				1F188FA668D262748E33648C /* Pods-11-NotesOnTheGo.release.xcconfig */,
+				0D53764D862EBDEDCCB96322 /* Pods-11-NotesOnTheGo.debug.xcconfig */,
+				0D8DD4B6B7F43361551F9045 /* Pods-11-NotesOnTheGo.release.xcconfig */,
 			);
-			name = Pods;
+			path = Pods;
 			sourceTree = "<group>";
 		};
-		B9058ADE0302CB025415BC83 /* Frameworks */ = {
+		9E543B191476D730B87652A7 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				AF0AC5C0288B989A3ADC758D /* Pods_11_NotesOnTheGo.framework */,
+				DCFC75939385A9E3C94A6CF6 /* Pods_11_NotesOnTheGo.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -145,11 +145,11 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 010360DA211C9365008B1BD6 /* Build configuration list for PBXNativeTarget "11-NotesOnTheGo" */;
 			buildPhases = (
-				9F99D04EACA8630E0461846E /* [CP] Check Pods Manifest.lock */,
+				8747477B4ED016625CEBE250 /* [CP] Check Pods Manifest.lock */,
 				010360C4211C9364008B1BD6 /* Sources */,
 				010360C5211C9364008B1BD6 /* Frameworks */,
 				010360C6211C9364008B1BD6 /* Resources */,
-				FE4019F391323ED9434B08C7 /* [CP] Embed Pods Frameworks */,
+				56E66069065F96B5136E031C /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -166,12 +166,14 @@
 		010360C0211C9364008B1BD6 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
+				BuildIndependentTargetsInParallel = YES;
 				LastSwiftUpdateCheck = 1000;
-				LastUpgradeCheck = 1000;
+				LastUpgradeCheck = 1430;
 				ORGANIZATIONNAME = Frogames;
 				TargetAttributes = {
 					010360C7211C9364008B1BD6 = {
 						CreatedOnToolsVersion = 10.0;
+						LastSwiftMigration = "";
 					};
 				};
 			};
@@ -207,25 +209,7 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
-		9F99D04EACA8630E0461846E /* [CP] Check Pods Manifest.lock */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
-				"${PODS_ROOT}/Manifest.lock",
-			);
-			name = "[CP] Check Pods Manifest.lock";
-			outputPaths = (
-				"$(DERIVED_FILE_DIR)/Pods-11-NotesOnTheGo-checkManifestLockResult.txt",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
-			showEnvVarsInLog = 0;
-		};
-		FE4019F391323ED9434B08C7 /* [CP] Embed Pods Frameworks */ = {
+		56E66069065F96B5136E031C /* [CP] Embed Pods Frameworks */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -240,6 +224,28 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-11-NotesOnTheGo/Pods-11-NotesOnTheGo-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		8747477B4ED016625CEBE250 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-11-NotesOnTheGo-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
 			showEnvVarsInLog = 0;
 		};
 /* End PBXShellScriptBuildPhase section */
@@ -308,6 +314,7 @@
 				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
 				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
 				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
 				CLANG_WARN_STRICT_PROTOTYPES = YES;
 				CLANG_WARN_SUSPICIOUS_MOVE = YES;
@@ -333,7 +340,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.4;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
 				ONLY_ACTIVE_ARCH = YES;
@@ -370,6 +377,7 @@
 				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
 				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
 				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
 				CLANG_WARN_STRICT_PROTOTYPES = YES;
 				CLANG_WARN_SUSPICIOUS_MOVE = YES;
@@ -389,7 +397,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.4;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
 				SDKROOT = iphoneos;
@@ -402,7 +410,7 @@
 		};
 		010360DB211C9365008B1BD6 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = BED5F1E99E463403076A287F /* Pods-11-NotesOnTheGo.debug.xcconfig */;
+			baseConfigurationReference = 0D53764D862EBDEDCCB96322 /* Pods-11-NotesOnTheGo.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
@@ -414,14 +422,14 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.frogames.NotesOnTheGo;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_VERSION = 4.2;
+				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Debug;
 		};
 		010360DC211C9365008B1BD6 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 1F188FA668D262748E33648C /* Pods-11-NotesOnTheGo.release.xcconfig */;
+			baseConfigurationReference = 0D8DD4B6B7F43361551F9045 /* Pods-11-NotesOnTheGo.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
@@ -433,7 +441,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.frogames.NotesOnTheGo;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_VERSION = 4.2;
+				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Release;
